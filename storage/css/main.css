@@ -40,7 +40,7 @@
     --color-yellow: #ffed00;
 
     /* ? OR "bordeaux" */
-    --color-bordeaux: #520020;
+    --color-bordeaux: #7a0038;
 
     --color-blue: #20234c;
     --color-blue-dark: #0e1237;
@@ -49,12 +49,12 @@
     --color-gray-dark: #4D4D4D;
     --color-text-behind: #f0f1f2;
 
-    --color-accent: var(--color-bordeaux, #520020);
-    --color-primary: var(--color-bordeaux, #520020);
+    /* --color-accent: var(--color-bordeaux, #7a0038); */
+    --color-primary: var(--color-bordeaux, #7a0038);
     --color-secondary: #a26578;
     --color-tertiary: #ffffff;
 
-    accent-color: var(--color-bordeaux, #520020);
+    accent-color: var(--color-primary, var(--color-bordeaux, #7a0038));
     interpolate-size: allow-keywords;
 
     --wall-bg-overlay: linear-gradient(0deg, #ffffffb3 0%, #ffffffb3 100%);
@@ -101,13 +101,23 @@ a {
     transition: none;
 }
 
+/* ? consider */
+:where(p, li) > a {
+    color: var(--color-primary);
+    font-weight: 700;
+}
+
+:where(p, li) > a:hover{
+    text-decoration: underline;
+}
 
 small {
     font-size: 80%;
 }
 
 dialog {
-    margin: initial;
+    margin: auto;
+    border: none;
 }
 
 ul,
@@ -233,6 +243,7 @@ body {
     text-transform: uppercase;
     transition: none;
     white-space: normal;
+    border: none;
 
     /* oh if only... */
     /* border-radius: 6px;
@@ -243,22 +254,24 @@ body {
 }
 
 .btn.btn--primary {
-    background-color: var(--color-primary, #520020);
+    background-color: var(--color-primary, #7a0038);
     color: white;
 }
 
 /* # HEADINGS */
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Exo 2', sans-serif;
-    color: var(--color-primary, #520020);
+    color: var(--color-primary, #7a0038);
     position: relative;
-    isolation: isolate;
+    /* ? maybe disable - would overlay subsequent elements */
+    /* isolation: isolate; */
     line-height: 1.0;
     font-weight: bold;
+    /* ! testing off */
     /* Flex - i hate this */
-    display: flex;
+    /* display: flex;
     flex-direction: column;
-    gap: 0.2em
+    gap: 0.2em */
 }
 
 h1 {
@@ -312,6 +325,11 @@ h5 {
     font-weight: 400;
     line-height: 1.25;
     letter-spacing: -0.001em;
+
+    /* ! debug */
+    color: cyan !important;
+    display: block;
+    margin-block: 0.5rem;
 }
 
 /* # text-behind */
@@ -366,6 +384,13 @@ hr {
     margin-block: 1.5rem;
 }
 
+.perex {
+    font-size: 1.125rem;
+    font-weight: 550;
+    /* ? maybe ? */
+    color: #111111;
+}
+
 .header__content {
     display: flex;
     align-items: center;
@@ -411,19 +436,19 @@ section:where([class*="bg-"]) {
 
 @media (max-width: 991px){
     section{
-        padding-block: 1rem;
+        padding-block: 2.0rem;
     }
 }
 
 /** Section colors **/
 .bg-primary{
-    background-color: var(--color-primary, var(--color-bordeaux, #520020));
+    background-color: var(--color-primary, var(--color-bordeaux, #7a0038));
     color: white;
     --color-text-behind: #6e133a;
 }
 
 .bg-bordeaux{
-    background-color: var(--color-bordeaux, #520020);
+    background-color: var(--color-bordeaux, #7a0038);
     color: white;
     --color-text-behind: #6e133a;
 }
@@ -448,15 +473,18 @@ section:where([class*="bg-"]) {
 }
 
 strong {
-    color: var(--color-bordeaux, #520020);
+    font-weight: 700;
+    /* ! debug */
+    color: greenyellow !important;
 }
 
-:is(.bg-primary, .bg-bordeaux, .bg-blue, figcaption) strong{
-    color: inherit;
-}
 
-.perex strong {
-    color: black;
+em {
+    font-style: normal;
+    font-weight: 700;
+    color: var(--color-bordeaux, #7a0038);
+    /* ! debug */
+    color: violet !important;
 }
 
 /* # UNDERLINES */
@@ -513,12 +541,12 @@ strong {
     position: absolute;
     right: calc(100% + 0.5rem);
 }
-.list.list--m > li{
+/* .list.list--m > li{
     margin-block: 0.5rem;
 }
 .list.list--sm > li{
     margin-block: 0.25rem;
-}
+} */
 
 .bullet-points {
     list-style-type: disc;
@@ -529,6 +557,7 @@ strong {
     color: var(--color-primary);
     font-size: 1.5rem;
     font-weight: 700;
+    line-height: 1;
 }
 
 .check-marks-big {
@@ -543,7 +572,7 @@ strong {
     content: '';
     position: static;
     background: no-repeat center center / contain;
-    background-image: url('/img/check-mark-primary.svg');
+    background-image: url('https://iniciativa-bydleni.cz/storage/IDB/img/check-mark-primary.svg');
     width: 2.5rem;
     height: 2.5rem;
     align-self: start;
@@ -674,7 +703,7 @@ figcaption{
 .hero{
     --hero-bg-overlay: linear-gradient(0deg, #c8d0d5eb 0%, #c8d0d5eb 100%);
     background: no-repeat center center/cover;
-    background-image: var(--hero-bg-overlay), url('/img/bg-hero_3840.jpg');
+    background-image: var(--hero-bg-overlay), url('https://iniciativa-bydleni.cz/storage/IDB/img/backgrounds/bg-hero_3840.jpg');
     color: var(--color-primary);
     position: relative;
     padding: 0;
@@ -698,16 +727,19 @@ figcaption{
     line-height: 1.25;
 }
 
-.hero__logo {
+.hero__logo__wrapper {
     display: flex;
     align-items: center;
     /* flex-wrap: wrap; */
     gap: 1rem 2.5rem;
 }
 
+.hero__logo {
+    flex: 0 0 auto;
+}
+
 .hero .logo{
     width: 225px;
-    flex: 0 0 auto;
 }
 
 @media screen and (max-width: 767px) {
@@ -715,7 +747,7 @@ figcaption{
         padding-top: 1.5rem;
         gap: 2.5rem;
     }
-    .hero__logo{
+    .hero__logo__wrapper{
         font-size: 1rem;
         gap: 1rem min(2.5rem, 5%);
     }
@@ -732,8 +764,9 @@ figcaption{
 }
 
 @media (max-width: 399px) {
-    .hero__logo {
+    .hero__logo__wrapper {
         flex-direction: column;
+        align-items: flex-start;
     }
 }
 
@@ -787,7 +820,6 @@ footer{
     padding-block: 2.5rem;
     background-color: #93989c;
     color: white;
-    margin-top: 3.5rem;
 }
 
 .footer__content{
@@ -809,6 +841,9 @@ footer .logo{
 }
 
 @media screen and (min-width: 992px) {
+    footer{
+        margin-top: 3.5rem;
+    }
     footer .logo{
         width: 200px;
         position: relative;
@@ -817,7 +852,7 @@ footer .logo{
 }
 
 .banner-form {
-    background-image: url('/img/bg-form-banner.png'), var(--wall-bg-overlay), url('/img/texture-wall_2000.jpg');
+    background-image: url('https://iniciativa-bydleni.cz/storage/IDB/img/backgrounds/bg-form-banner.png'), var(--wall-bg-overlay), url('https://iniciativa-bydleni.cz/storage/IDB/img/backgrounds/texture-wall_2000.jpg');
     background-repeat: no-repeat;
     background-position: right center, center, center;
     background-size: auto 300px, cover, cover;
@@ -840,33 +875,28 @@ footer .logo{
 
 @media screen and (max-width: 767px) {
     .banner-form {
-        background-image: var(--wall-bg-overlay), url('/img/texture-wall_2000.jpg');
+        background-image: var(--wall-bg-overlay), url('https://iniciativa-bydleni.cz/storage/IDB/img/backgrounds/texture-wall_2000.jpg');
     }
     .banner-form h2 {
         max-width: unset;
     }
 }
 
+blockquote,
 .quote {
     background: no-repeat center center/cover;
-    background-image: var(--wall-bg-overlay), url('/img/texture-wall_2000.jpg');
+    background-image: var(--wall-bg-overlay), url('https://iniciativa-bydleni.cz/storage/IDB/img/backgrounds/texture-wall_2000.jpg');
     font-size: 18px;
     line-height: 1.25;
-    color: var(--color-primary);
+    /* ! figure out text coloring */
+    /* color: var(--color-primary); */
     font-weight: 550;
     margin-block: 1.5rem;
     padding: 1.0rem min(2.5rem, 5%);
     position: relative;
+    box-shadow: inset 4px 0px 0px 0px var(--color-primary);
 }
 
-.quote:before {
-    content: '';
-    display: block;
-    position: absolute;
-    inset: 0 auto 0 0;
-    width: 4px;
-    background-color: var(--color-primary);
-}
 
 .magazine {
     background-color: #e8e8e8;
@@ -934,11 +964,11 @@ footer .logo{
 
 
 .types--one {
-    background-image: var(--wall-bg-overlay), url('/img/texture-wall_2000.jpg');
+    background-image: var(--wall-bg-overlay), url('https://iniciativa-bydleni.cz/storage/IDB/img/backgrounds/texture-wall_2000.jpg');
 }
 
 .types--two {
-    border: 1px solid var(--color-primary, #520020);
+    border: 1px solid var(--color-primary, #7a0038);
 }
 
 @media screen and (max-width: 767px) {
@@ -951,6 +981,58 @@ footer .logo{
     }
 }
 
-/* TODO: Někam zakomponovat bg img u form banneru na mobilu? */
-/* TODO: Formulář */
+/* ! HIDE Chat */
+#smartsupp-widget-container {
+    display: none !important;
+}
 
+html:has(dialog[open]),
+html:has([data-custom-dialog][open]:not([open="false"])) {
+    overflow: hidden;
+}
+
+/* custom dialog that isn't open, or open="false" */
+[data-custom-dialog]:is(:not([open]), [open="false"]) {
+    display: none !important;
+}
+
+/** DIALOG REWRITE **/
+[data-custom-dialog] {
+    position: fixed;
+    inset: 0;
+    z-index: 99;
+    /* backdrop */
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+
+dialog::backdrop,
+dialog::-webkit-backdrop {
+    background: rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+}
+
+.dialog-close {
+    appearance: none;
+    border: none;
+    outline: none;
+    background: transparent;
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-family: sans-serif;
+    font-size: 1.5rem;
+    width: 2.75rem;
+    height: 2.5rem;
+    color: black;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+/* Lightbox slide size fix */
+.fancybox__slide.has-image>.fancybox__content {
+    width: 100% !important;
+    height: 100% !important;
+}
