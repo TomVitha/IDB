@@ -1,0 +1,37 @@
+/* Exo 2 */
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* Exo 2 Condensed */
+@import url('https://fonts.cdnfonts.com/css/exo-2-medium-condensed');
+
+/* Archia */
+@font-face {
+    font-family: 'Archia';
+    src: url('https://www.central-group.cz/storage/IDB/fonts/Archia-Thin.otf') format("opentype");
+    font-weight: 100;
+}
+@font-face {
+    font-family: 'Archia';
+    src: url('https://www.central-group.cz/storage/IDB/fonts/Archia-Light.otf') format("opentype");
+    font-weight: 300;
+}
+@font-face {
+    font-family: 'Archia';
+    src: url('https://www.central-group.cz/storage/IDB/fonts/Archia-Regular.otf') format("opentype");
+    font-weight: 400;
+}
+@font-face {
+    font-family: 'Archia';
+    src: url('https://www.central-group.cz/storage/IDB/fonts/Archia-Medium.otf') format("opentype");
+    font-weight: 500;
+}
+@font-face {
+    font-family: 'Archia';
+    src: url('https://www.central-group.cz/storage/IDB/fonts/Archia-Bold.otf') format("opentype");
+    font-weight: 700;
+}
+@font-face {
+    font-family: 'Archia';
+    src: url('https://www.central-group.cz/storage/IDB/fonts/Archia-SemiBold.otf') format("opentype");
+    font-weight: 600;
+}
