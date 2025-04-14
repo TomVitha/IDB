@@ -102,7 +102,7 @@ a {
 }
 
 /* ? consider */
-:where(p, li) > a {
+:where(main :is(p, li)) > a {
     color: var(--color-primary);
     font-weight: 700;
 }
@@ -121,7 +121,8 @@ dialog {
 }
 
 ul,
-ol {
+ol,
+menu {
     list-style-type: none;
 }
 
@@ -393,6 +394,7 @@ h5 {
 
 p {
   margin-block: 1rem;
+  text-wrap: pretty;
 }
 
 p:first-child {
@@ -543,7 +545,7 @@ em {
 }
 
 /* * Animated underline (transitions, multiline)  */
-/* ! Multiline may break when flex child ?? */
+/* ! Multiline-underline may not work when flex child ?? */
 .underline-animated {
   --underline-height: 2px;
   background-image: linear-gradient(transparent, transparent), linear-gradient(currentColor, currentColor);
@@ -556,6 +558,128 @@ em {
 
 .underline-animated:hover {
   background-size: 0 var(--underline-height), 100% var(--underline-height);
+}
+
+/* # HEADER */
+header {
+    position: relative;
+    z-index: 999;
+    overflow: visible;
+}
+.header__top {
+    background-color: var(--color-primary);
+    color: white;
+    height: 3.5rem;
+}
+.header__top nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.header__hamburger {
+    appearance: none;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width:  36px;
+    height: 36px;
+    aspect-ratio: 1;
+    display: none;
+}
+header menu {
+    display: flex;
+    align-items: stretch;
+    justify-content: end;
+    gap: 1.5rem;
+    background-color: var(--color-primary);
+}
+
+header menu .logo {
+    justify-self: start;
+}
+
+header a{
+    display: block;
+    color: inherit;
+    font-weight: 400;
+    text-decoration: none;
+}
+
+header a:hover {
+    text-decoration: underline;
+}
+
+.header__logo {
+    flex: 0 0 auto;
+    align-self: start;
+    position: relative;
+    z-index: 1;
+    top: 1rem;
+}
+
+.header__logo .logo {
+    width: 200px;
+}
+
+.header__bottom{
+    background-color: #92989c;
+    color: white;
+    height: 2.75rem;
+}
+
+.header__bottom nav {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: 0 1.25rem;
+    
+}
+
+@media screen and (max-width: 991px) {
+    /* !temp */
+    header {
+        /* overflow: clip; */
+    }
+    .header__hamburger{
+        display: flex;
+    }
+    .header__logo .logo {
+        width: auto;
+        height: 60px;
+    }
+    header menu {
+        flex-direction: column;
+        position: absolute;
+        gap: 0;
+        right: 0;
+        top: 3.5rem;
+        translate: 0 -100%;
+        width: 100%;
+        padding-top: calc(56px - 60px + 1rem + 1rem);
+        z-index: -1;
+        visibility: hidden;
+        transition: translate 150ms, visibility 150ms;
+    }
+    header menu.open {
+        translate: 0 0;
+        visibility: visible;
+    }
+    header menu li {
+        border-top: 1px solid rgba(255, 255, 255, 0.5);
+    }
+    header menu a {
+        padding: 0.75em 20px;
+    }
+    .header__bottom {
+        display: none;
+    }
 }
 
 
@@ -591,6 +715,8 @@ em {
 }
 
 .check-marks li:before {
+    /* content: '✔'; */
+    content: '✓';
     content: '✔';
     color: var(--color-primary);
     font-size: 1.5rem;
@@ -808,14 +934,6 @@ figcaption{
     overflow: clip;
 }
 
-
-.hero__top-bar{
-    background-color: rgba(0,0,0,0.25);
-    color: white;
-    padding-block: 0.75rem;
-    line-height: 1.25;
-}
-
 .hero__content{
     display: flex;
     flex-direction: column;
@@ -823,18 +941,11 @@ figcaption{
     padding-block: 2.5rem 3rem;
     font-size: 1.375rem;
     line-height: 1.25;
+    height: 100%;
 }
 
-.hero__logo__wrapper {
-    display: flex;
-    align-items: center;
-    /* flex-wrap: wrap; */
-    gap: 1rem 2.5rem;
-}
 
-.hero__logo {
-    flex: 0 0 auto;
-}
+
 
 .hero .logo{
     width: 225px;
@@ -844,28 +955,13 @@ figcaption{
     .hero__content{
         padding-top: 1.5rem;
         gap: 2.5rem;
-    }
-    .hero__logo__wrapper{
-        font-size: 1rem;
-        gap: 1rem min(2.5rem, 5%);
-    }
-    .hero .logo{
-        width: 100px;
-        align-self: flex-start;
-    }   
+    }  
 }
 
 .hero__buttons {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem 1rem;
-}
-
-@media (max-width: 399px) {
-    .hero__logo__wrapper {
-        flex-direction: column;
-        align-items: flex-start;
-    }
 }
 
 .showcases{

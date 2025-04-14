@@ -1,3 +1,26 @@
 <header>
-  <!-- obsah headeru -->
+  <div class="header__top">
+    <nav class="container">
+      <a href="/page/iniciativa-uvod" class="header__logo">
+        <img class="logo" src="https://iniciativa-bydleni.cz/storage/IDB/img/logos/logo-idb-white-wine-border.svg" alt="Iniciativa pro dostupné bydlení" width="200">
+      </a>
+      <button href="" class="header__hamburger" onclick="event.preventDefault(); $(this).next('menu').toggleClass('open');">
+        <i class="fal fa-bars"></i>
+      </button>
+      <menu>
+        <li><a href="#">Dostupnost bydlení</a></li>
+        <li><a href="#">DESIGN&#8209;BUILD</a></li>
+        <li><a href="#">Příprava území</a></li>
+        <li><a href="#">Principy</a></li>
+        <li><a href="#">Katalog</a></li>
+        <li><a href="#">Poradenství</a></li>
+      </menu>
+    </nav>
+  </div>
+  <div class="header__bottom">
+    <nav class="container">
+      <a href="mailto:info@iniciativa-bydleni.cz"><i class="fa-light fa-envelope">&nbsp;</i>info@iniciativa-bydleni.cz</a>
+      <a href="tel:+420605227221"><i class="fa-light fa-phone">&nbsp;</i>605 227 221</a>
+    </nav>
+  </div>
 </header>
