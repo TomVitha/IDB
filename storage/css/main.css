@@ -54,6 +54,9 @@
     --color-secondary: #a26578;
     --color-tertiary: #ffffff;
 
+    --color-pros: #134013;
+    --color-cons: var(--color-bordeaux, #7a0038);
+
     accent-color: var(--color-primary, var(--color-bordeaux, #7a0038));
     interpolate-size: allow-keywords;
 
@@ -134,6 +137,7 @@ img {
     user-select: none;
     /* -webkit-user-drag: none; */
 }
+
 
 figure {
     position: relative;
@@ -270,34 +274,29 @@ body {
     font-family: 'Exo 2', sans-serif;
     color: var(--color-primary, #7a0038);
     position: relative;
-    /* ? maybe disable - would overlay subsequent elements */
-    /* isolation: isolate; */
     line-height: 1.0;
-    font-weight: bold;
-    /* ! testing off */
-    /* Flex - i hate this */
-    /* display: flex;
-    flex-direction: column;
-    gap: 0.2em */
+    font-weight: 700;
 }
 
 
 h1 {
     font-size: 3.5rem;
-    font-weight: 800;
+    /* font-weight: 800; */
+    font-weight: 300;
     /* -webkit-hyphens: auto; */
     /* hyphens: auto; */
-    letter-spacing: 0.015em;
-    line-height: 1.0;
+    line-height: 1.10;
     max-width: 45rem;
     word-break: break-word;
     text-wrap: balance;
     gap: 1.5rem;
+    /* ! TEMP TESTING */
+    /** "Sequences of white space are collapsed. Lines are broken at newline characters, at <br>, and as necessary to fill line boxes." **/
+    /* white-space: pre-line; */
 }
 
-
-:is(h1, h2, h3, h4, h5, h6) strong {
-    
+h1 strong {
+    font-weight: 800;
 }
 :is(h1, h2, h3, h4, h5, h6) b {
     font-size: 1.6em;
@@ -309,16 +308,11 @@ h1 {
     letter-spacing: -0.001em;
 
     /* ! debug */
-    color: cyan !important;
+    /* color: cyan !important; */
     display: block;
     margin-block: 0.5rem;
 }
 
-@media (max-width: 767px){
-    h1{
-        font-size: 2.75rem;
-    }
-}
 
 h2 {
     font-size: 2.75rem;
@@ -327,16 +321,26 @@ h2 {
     font-weight: 800;
     /* ? maybe ? */
     text-wrap: balance;
+    /* ! debug */
+    /* color: firebrick !important; */
 }
 
 h2 a{
     text-decoration: none;
 }
 
-
 h3 {
     font-size: 1.75rem;
     margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-weight: 775;
+    /* ! debug */
+    /* color: blue !important; */
+}
+
+h4 {
+    font-size: 1.25rem;
+    margin-top: 1.75rem;
     margin-bottom: 1rem;
 }
 
@@ -351,9 +355,9 @@ h5 {
     margin-bottom: 0;
 }
 
-/* # text-behind */
+/**  text-behind **/
 /* TODO: Refactor text-behind positioning */
-[data-text-behind]:not([data-text-behind=""]){
+[data-text-behind]:not([data-text-behind=""]) {
     padding-top: 3.5rem;
 }
 /* ? reduce specificity ? */
@@ -372,37 +376,45 @@ h5 {
     white-space: nowrap;
 }
 
-/* @media (max-width: 1199px) {
-    [data-text-behind]:not([data-text-behind=""])::before{
-        translate: -15px 7.75rem;
+/** HEADINGS MOBILE QUERIES **/
+@media (max-width: 767px) {
+    h1 {
+        font-size: 2.25rem;
     }
-} */
-
-@media (max-width: 991px){
-    h2{
-        font-size: 2rem;
+    h2 {
+        font-size: 1.75rem;
+        /* font-size: 1.625rem; */
     }
-    [data-text-behind]:not([data-text-behind=""]){
+    [data-text-behind]:not([data-text-behind=""]) {
         padding-top: 2rem;
     }
-    [data-text-behind]:not([data-text-behind=""])::before{
+    [data-text-behind]:not([data-text-behind=""])::before {
         font-size: 4rem;
         translate: -15px 4.5rem;
+    }
+    h3 {
+        font-size: 1.5rem;
+        /* font-size: 1.375rem; */
+
     }
 }
 
 
 p {
-  margin-block: 1rem;
-  text-wrap: pretty;
+    margin-block: 1rem;
+    text-wrap: pretty;
 }
 
 p:first-child {
-  margin-top: 0;
+    margin-top: 0;
 }
 
 p:last-child {
-  margin-bottom: 0;
+    margin-bottom: 0;
+}
+
+p:has(+section) {
+    margin-bottom: 0;
 }
 
 hr {
@@ -444,12 +456,14 @@ hr {
 }
 
 
+
 /* # SECTIONS */
 section {
     position: relative;
+    overflow-x: hidden;
     overflow-x: clip;
-    scroll-margin-top: 3.0rem;
-    padding-block: 3.0rem;
+    scroll-margin-top: 4.0rem;
+    padding-block: 4.0rem;
 }
 
 /* Section w/o bg after a section w/o bg */
@@ -460,10 +474,10 @@ section:not([class*="bg-"])+section:not([class*="bg-"]) {
 /* Section w/ bg */
 section:where([class*="bg-"]) {
     /* margin-block: 0; */
-    padding-block: 3.0rem;
+    padding-block: 4.0rem;
 }
 
-@media (max-width: 991px){
+@media (max-width: 991px) {
     section{
         padding-block: 2.0rem;
     }
@@ -474,6 +488,11 @@ section>section:first-child{
 }
 section>section:last-child{
     padding-bottom: 0;
+}
+
+/** Sub-sections **/
+section section {
+    /* ? idk */
 }
 
 /** Section colors **/
@@ -504,14 +523,14 @@ section>section:last-child{
     margin-top: 0;
 }
 
-:is(.bg-primary, .bg-bordeaux, .bg-blue) :is(h1, h2, h3, h4, h5, h6){
+:is(.bg-primary, .bg-bordeaux, .bg-blue) :is(h1, h2, h3, h4, h5, h6) {
     color: inherit;
 }
 
 strong {
     font-weight: 700;
     /* ! debug */
-    color: cornflowerblue !important;
+    /* color: cornflowerblue !important; */
 }
 
 
@@ -520,7 +539,7 @@ em {
     font-weight: 700;
     color: var(--color-bordeaux, #7a0038);
     /* ! debug */
-    color: violet !important;
+    /* color: violet !important; */
 }
 
 /* # UNDERLINES */
@@ -662,20 +681,24 @@ header a:hover {
         top: 3.5rem;
         translate: 0 -100%;
         width: 100%;
-        padding-top: calc(56px - 60px + 1rem + 1rem);
+        padding-top: calc(60px - (56px - 1rem));
+        padding-bottom: 0.5rem;
         z-index: -1;
         visibility: hidden;
         transition: translate 150ms, visibility 150ms;
+        font-size: 0.875rem;
+        backdrop-filter: brightness(0.5);
+        background-color: color-mix(in srgb, var(--color-primary) 80%, black);
     }
     header menu.open {
         translate: 0 0;
         visibility: visible;
     }
     header menu li {
-        border-top: 1px solid rgba(255, 255, 255, 0.5);
+        /* border-top: 1px solid rgba(255, 255, 255, 0.5); */
     }
     header menu a {
-        padding: 0.75em 20px;
+        padding: 1.00em 35px;
     }
     .header__bottom {
         display: none;
@@ -684,63 +707,91 @@ header a:hover {
 
 
 /* # LIST */
-.list{
+.list {
+    --list-marker-img: none;
+    --list-marker-size: 0px;
+    --list-marker-gap: 1rem;
+
     font-size: inherit;
-    padding-left: 1.75rem;
-    /* ? maybe flex ? */
+    padding: 0rem;
     display: flex;
     flex-direction: column;
     row-gap: 0.75rem;
 }
+
+/* Nested list */
+.list .list {
+    margin-top: 0.25rem;
+    row-gap: 0.25rem;
+}
+
 .list > li{
     position: relative;
-    /* margin-block: 1rem; */
+    min-height: var(--list-marker-size);
+    align-content: center;
+    padding-left: calc(var(--list-marker-size) + var(--list-marker-gap));
 }
-.list > li::marker{
+
+/* Default CSS marker */
+.list > li::marker {
     color: var(--color-primary);
 }
-.list > li:before{
-    position: absolute;
-    right: calc(100% + 0.5rem);
-}
-/* .list.list--m > li{
-    margin-block: 0.5rem;
-}
-.list.list--sm > li{
-    margin-block: 0.25rem;
-} */
 
-.bullet-points {
-    list-style-type: disc;
-}
-
-.check-marks li:before {
-    /* content: '✔'; */
-    content: '✓';
-    content: '✔';
-    color: var(--color-primary);
-    font-size: 1.5rem;
-    font-weight: 700;
-    line-height: 1;
-}
-
-.check-marks-big {
-    padding-left: 0rem;
-}
-.check-marks-big li {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-.check-marks-big li:before {
+/* Custom marker */
+.list > li:before {
     content: '';
-    position: static;
-    background: no-repeat center center / contain;
-    background-image: url('https://iniciativa-bydleni.cz/storage/IDB/img/check-mark-primary.svg');
-    width: 2.5rem;
-    height: 2.5rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: inline-flex;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    background-image: var(--list-marker-img);
+    width:  var(--list-marker-size);
+    height: var(--list-marker-size);
     align-self: start;
     flex: 0 0 auto;
+}
+
+/* Bullet points */
+.bullet-points {
+    --list-marker-gap: 0px;
+    list-style-type: disc;
+    padding-left: 1.75rem;
+    row-gap: 0.5rem;
+}
+
+/* ? maybe redundant - it's size 0 anyway */
+.bullet-points > li::before {
+    content: none;
+}
+
+.check-marks {
+    --list-marker-img: url('/img/check-mark-primary.svg');
+    --list-marker-size: 1.5rem;
+}
+
+.check-marks.big {
+    --list-marker-size: 2.5rem;
+}
+
+.pros {
+    --list-marker-img: url('/img/check-mark-green.svg');
+    --list-marker-size: 1.5rem;
+}
+
+.cons {
+    --list-marker-img: url('/img/x-mark-dark-red.svg');
+    --list-marker-size: 1.5rem;
+}
+
+/* Colored heading preceding list */
+:is(h3, h4):has(+.pros), .pros strong {
+    color: var(--color-pros);
+}
+:is(h3, h4):has(+.cons), .cons strong {
+    color: var(--color-cons);
 }
 
 
@@ -829,6 +880,30 @@ header a:hover {
     translate: 0 -50%;
 }
 
+/* # TABLE */
+table {
+    color: black;
+    table-layout: fixed;
+    line-height: 1.15;
+    background-color: #ececec;
+    /* ? MAYBE */
+    /* word-break: break-word; */
+}
+
+th {
+    font-weight: 700;
+}
+:is(td, th) {
+    position: relative;
+    /* ? maybe disable border-collapse ? */
+    border: 2px solid white;
+    padding: 0.5em 0.75em;
+}
+
+.table-wrapper {
+    max-width: 100%;
+    overflow-x: auto;
+}
 
 
 @media screen and (min-width: 768px) {
@@ -856,6 +931,7 @@ header a:hover {
     justify-content: space-evenly;
     gap: 0.0rem 3vw;
     text-align: center;
+    line-height: 1.15;
 }
 
 .member{
@@ -869,17 +945,26 @@ header a:hover {
     margin-inline: auto;
 }
 
-figcaption{
+/* ? maybe ? */
+figcaption {
+    line-height: 1.15;
+    margin-top: 1rem;
+    /* ! debug */
+    /* color: limegreen !important; */
+}
+
+/** Condensed figcaption **/
+figcaption small{
     line-height: 1.15;
     font-family: 'Exo 2 Condensed', 'Exo 2', 'Roboto', sans-serif;
     /* margin-top: 0.5rem; */
-    margin-top: 1rem;
-    text-align: center;
+    /* text-align: center; */
     text-decoration: none;
-    font-size: 0.875rem;
+    /* font-size: 0.875rem; */
 }
 
-@media (max-width: 767px){
+
+@media (max-width: 767px) {
     .members{
         flex-wrap: wrap;
     }
@@ -930,32 +1015,32 @@ figcaption{
     background-image: var(--hero-bg-overlay), url('https://iniciativa-bydleni.cz/storage/IDB/img/backgrounds/bg-hero_3840.jpg');
     color: var(--color-primary);
     position: relative;
-    padding: 0;
-    overflow: clip;
+    padding: 80px 0 56px;
+    overflow: visible;
 }
 
 .hero__content{
     display: flex;
     flex-direction: column;
-    gap: 3.5rem;
-    padding-block: 2.5rem 3rem;
+    gap: 2.5rem;
     font-size: 1.375rem;
     line-height: 1.25;
     height: 100%;
+    justify-content: center;
 }
-
-
-
 
 .hero .logo{
     width: 225px;
 }
 
 @media screen and (max-width: 767px) {
-    .hero__content{
+    .hero {
+        padding-top: 42px;
+    }
+    /* .hero__content{
         padding-top: 1.5rem;
         gap: 2.5rem;
-    }  
+    }   */
 }
 
 .hero__buttons {
@@ -963,6 +1048,34 @@ figcaption{
     flex-wrap: wrap;
     gap: 0.5rem 1rem;
 }
+
+/** two layers - bg + fg - multiply blend **/
+.hero.composite{
+    --hero-bg: url('/img/backgrounds/bg-hero-wall_3300.jpg');
+    /** Transparent fallback if no fg given **/
+    --hero-fg: linear-gradient(0deg, transparent 0%, transparent 100%);
+    background-position: calc(50vw - 200px) center, center;
+    background-image: var(--hero-fg), var(--hero-bg);
+    background-size: auto 100%, cover;
+    background-blend-mode: multiply, normal;
+    background-repeat: no-repeat;
+    height: 600px;
+    padding: 0;
+}
+
+@media screen and (max-width: 575px) {
+    .hero.composite {
+        height: 450px;
+        background-size: auto 350px, cover;
+        background-position: calc(50vw - 200px) 100%, center;
+    }
+    .hero.composite .hero__content {
+        padding-block: 38px;
+        justify-content: start;
+        /* text-align: center; */
+    }
+}
+
 
 .showcases{
     display: flex;
@@ -1042,20 +1155,20 @@ article.wall {
 
 .wall-headings h3::before {
     content: counter(headings);
-    display: inline-block;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
     background-color: var(--color-primary);
     color: white;
     font-size: 2.5rem;
-    line-height: 1;
     font-weight: 300;
     text-align: right;
+    line-height: 1;
     height: 1.5em;
-    align-content: center;
+    margin-right: min(1.5rem, 5%);
     padding: 0 0.4em 0 0.75em;
-    flex-shrink: 0;
     white-space: nowrap;
     clip-path: polygon(0 0, 100% 0%, 100% 100%, 0.4em 100%);
-    margin-right: min(1.5rem, 5%);
     /* ? maybe ? */
     /* align-self: start; */
 }
@@ -1075,7 +1188,7 @@ article.wall {
 }
 
 footer{
-    padding-block: 2.5rem;
+    padding-block: 1.5rem;
     background-color: #93989c;
     color: white;
 }
@@ -1144,15 +1257,23 @@ blockquote,
 .quote {
     background: no-repeat center center/cover;
     background-image: var(--wall-bg-overlay), url('https://iniciativa-bydleni.cz/storage/IDB/img/backgrounds/texture-wall_2000.jpg');
-    font-size: 18px;
     line-height: 1.25;
     /* ! figure out text coloring */
     /* color: var(--color-primary); */
     font-weight: 550;
+    font-style: normal;
     margin-block: 1.5rem;
     padding: 1.0rem min(2.5rem, 5%);
     position: relative;
+    /* Left 'border' */
     box-shadow: inset 4px 0px 0px 0px var(--color-primary);
+}
+
+@media screen and (min-width: 992px) {
+    blockquote,
+    .quote {
+        font-size: 1.125rem;
+    }
 }
 
 
@@ -1193,31 +1314,28 @@ blockquote,
     position: relative;
 }
 
-.types h2 {
+.types h3 {
     position: absolute;
-    background-color: var(--color-primary);
     color: white;
+    background-color: var(--color-primary);
     top: 0;
     left: min(2.5rem, 5%);
-    padding: 0.4em 0.9em;
+    padding: 0.55em 0.9em;
     translate: 0 -50%;
-    font-size: 1.75rem;
-    font-weight: 700;
     max-width: 90%;
-    line-height: 1.3;
 }
 
 .types figure figcaption {
     position: absolute;
-    font-size: 1.25rem;
+    font-size: 1.125rem;
     background-color: var(--color-primary);
     top: -8px;
     left: -8px;
     margin: 0;
     color: white;
     font-family: inherit;
-    padding: 0.333rem 1.5rem 0.333rem 0.85rem;
-    clip-path: polygon(0 0, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+    padding: 0.4em 1.25em 0.4em 0.75em;
+    clip-path: polygon(0 0, 100% 0%, calc(100% - 0.666em) 100%, 0% 100%);
 }
 
 
@@ -1234,9 +1352,26 @@ blockquote,
         grid-template-columns: 1fr;
         margin-top: 3rem;
     }
-    .types h2 {
-        font-size: 1.25rem;
-    }
+}
+
+.alternator {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    gap: 3rem 0;
+}
+
+.alternator :nth-child(odd) {
+    align-self: start;
+}
+
+.alternator :nth-child(even) {
+    align-self: end;
+}
+
+.alternator img {
+    max-height: 400px;
 }
 
 /* ! HIDE Chat */
@@ -1289,7 +1424,7 @@ dialog::-webkit-backdrop {
     cursor: pointer;
 }
 
-/* Lightbox slide size fix */
+/** Fixes fancybox slide 0px size **/
 .fancybox__slide.has-image>.fancybox__content {
     width: 100% !important;
     height: 100% !important;
