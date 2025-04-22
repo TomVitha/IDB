@@ -358,6 +358,7 @@ h5 {
 /**  text-behind **/
 /* TODO: Refactor text-behind positioning */
 [data-text-behind]:not([data-text-behind=""]) {
+    position: relative;
     padding-top: 3.5rem;
 }
 /* ? reduce specificity ? */
@@ -796,6 +797,7 @@ header a:hover {
 
 
 /** Letters Counter **/
+/* ! todo - fix marker positioning, gap */
 .counter-letters{
     counter-reset: counter-letters;
 }
@@ -851,7 +853,7 @@ header a:hover {
     counter-increment: phallic;
     position: relative;
     background-color: white;
-    color: var(--color-primary);
+    color: black;
     border-radius: 2rem 3px 3px 2rem;
     padding: 0.75rem;
     padding-left: 4.5rem;
@@ -1076,6 +1078,14 @@ figcaption small{
     }
 }
 
+/* ! temp testing */
+.composite h1 {
+    max-width: 550px;
+}
+.composite h1 br {
+    display: none;
+}
+
 
 .showcases{
     display: flex;
@@ -1142,7 +1152,9 @@ article.wall {
 .wall-headings h3 {
     counter-increment: headings;
     --color-text-behind: #fefefe;
-    background: no-repeat center center/cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
     background-image: var(--wall-bg-overlay), url('https://iniciativa-bydleni.cz/storage/IDB/img/backgrounds/texture-wall_2000.jpg');
     padding: 1.0rem min(1.5rem, 5%);
     position: relative;
@@ -1360,18 +1372,32 @@ blockquote,
     justify-content: center;
     align-items: start;
     gap: 3rem 0;
+    /* ! temp */
+    /* background: red; */
 }
 
-.alternator :nth-child(odd) {
+.alternator > :nth-child(odd) {
     align-self: start;
 }
 
-.alternator :nth-child(even) {
+.alternator > :nth-child(even) {
     align-self: end;
+    flex-direction: row-reverse;
+}
+
+.alternator figure {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /* ? maybe */
+    gap: 16px;
+    flex-wrap: wrap;
 }
 
 .alternator img {
+    /* ? dial-in the values */
     max-height: 400px;
+    max-width: min(600px, 100%);
 }
 
 /* ! HIDE Chat */
