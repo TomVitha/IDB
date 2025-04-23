@@ -282,6 +282,8 @@ body {
     position: relative;
     line-height: 1.0;
     font-weight: 700;
+    /* ? maybe */
+    /* text-box: trim-both cap alphabetic; */
 }
 
 h1 {
@@ -297,6 +299,7 @@ h1 strong {
 }
 :is(h1, h2, h3, h4, h5, h6) b {
     font-size: 1.6em;
+    vertical-align: sub;
 }
 :is(h1, h2, h3, h4, h5, h6) small {
     font-size: 1.25rem;
@@ -384,6 +387,8 @@ h5 {
     z-index: -1;
     /* ! debug */
     /* background: rgba(0, 0, 128, 0.2); */
+    /* ? maybe */
+    /* text-box: trim-both cap alphabetic; */
 }
 
 @media screen and (max-width: 1199px) {
@@ -496,7 +501,7 @@ section:where([class*="bg-"]) {
 
 @media (max-width: 991px) {
     section{
-        padding-block: 3.0rem;
+        padding-block: 2.0rem;
     }
 }
 
@@ -739,7 +744,7 @@ header a:hover {
     padding: 0rem;
     margin-top: 1rem;
     /* ? maybe ? */
-    margin-left: 0.5rem;
+    margin-left: 12px;
 }
 
 /* Nested list */
@@ -786,6 +791,7 @@ header a:hover {
     --list-marker-gap: 0px;
     list-style-type: disc;
     padding-left: 1.75rem;
+    margin-left: 0;
     row-gap: 0.5rem;
 }
 
@@ -818,39 +824,27 @@ header a:hover {
 :is(h4):has(+.cons), .cons strong { color: var(--color-cons); }
 
 
-/** Letters Counter **/
-/* ! todo - fix marker positioning, gap */
-.counter-letters{
-    counter-reset: counter-letters;
-}
 
-.counter-letters > li{
-    counter-increment: counter-letters;
-}
-
-.counter-letters > li::before{
-    content: counter(counter-letters, lower-alpha) ') ';
-}
-
-
-/** Fancy Counter **/
-.fancy-counter{
-    counter-reset: fancy-counter;
+/* Trapezoid */
+.trapezoid{
+    counter-reset: counter-number;
     list-style-type: none;
     padding-left: 4.0rem;
+    row-gap: 1rem;
 }
 
-.fancy-counter > li{
-    counter-increment: fancy-counter;
+.trapezoid > li{
+    counter-increment: counter-number;
     position: relative;
     padding-left: 1.5rem;
 }
 
-.fancy-counter > li::before{
-    content: counter(fancy-counter);
+.trapezoid > li::before{
+    content: counter(counter-number);
     font-size: 1.75rem;
     background-color: var(--color-primary);
     position: absolute;
+    left: auto;
     right: 100%;
     color: white;
     font-weight: 200;
@@ -876,7 +870,7 @@ header a:hover {
     position: relative;
     background-color: white;
     color: black;
-    border-radius: 2rem 3px 3px 2rem;
+    border-radius: 2rem 0px 0px 2rem;
     padding: 0.75rem;
     padding-left: 4.5rem;
     min-height: 4rem;
@@ -902,6 +896,35 @@ header a:hover {
     left: 0.5rem;
     top: 50%;
     translate: 0 -50%;
+}
+
+/** Letters Counter **/
+/* ! todo - fix marker positioning, gap */
+.counter-letters{
+    counter-reset: counter-letters;
+}
+
+.counter-letters > li{
+    counter-increment: counter-letters;
+}
+
+.counter-letters > li::before{
+    content: counter(counter-letters, lower-alpha) ') ';
+}
+
+/** Alpha Counter **/
+/* ! todo - fix marker positioning, gap */
+.counter-alpha{
+    counter-reset: counter-alpha;
+}
+
+.counter-alpha > li{
+    counter-increment: counter-alpha;
+}
+
+.counter-alpha > li::before{
+    content: counter(counter-alpha, lower-alpha);
+    text-transform: uppercase;
 }
 
 .cols-2 {
@@ -1434,7 +1457,7 @@ blockquote,
     flex-direction: column;
     justify-content: center;
     align-items: start;
-    gap: 3rem 0;
+    gap: 2.5rem 0;
     padding-inline: min(2.5rem, 5%);
     /* ! debug */
     /* background: red; */
@@ -1532,29 +1555,66 @@ dialog::-webkit-backdrop {
 * {
     /* font-family: 'Inter', 'Poppins', 'Roboto', 'Arial', sans-serif !important; */
 }
-/* h6 {
+h6 {
     font-size: calc(1rem * pow(1.20, 1));
     font-size: 20px;
+    margin-top: 1.25rem;
+    /* color: yellow !important; */
 }
 h5 {
     font-size: calc(1rem * pow(1.20, 2));
     font-size: 24px;
+    margin-top: 1.5rem;
+    /* color: magenta !important; */
 }
 h4 {
     font-size: calc(1rem * pow(1.20, 3));
     font-size: 28px;
+    /* color: cyan !important; */
 }
 h3 {
     font-size: calc(1rem * pow(1.20, 4));
     font-size: 34px;
     font-size: 32px;
     font-weight: 700;
+    margin-bottom: 1rem;
+    /* color: blue !important; */
 }
 h2 {
     font-size: calc(1rem * pow(1.20, 5));
     font-size: 40px;
+    /* color: green !important; */
 }
 h1 {
     font-size: calc(1rem * pow(1.20, 6));
     font-size: 48px;
-} */
+    font-weight: 800;
+    /* color: red !important; */
+}
+
+@media screen and (max-width: 767px) {
+    h6 {
+        font-size: calc(1rem * pow(1.15, 1));
+        font-size: 18px;
+    }
+    h5 {
+        font-size: calc(1rem * pow(1.15, 2));
+        font-size: 20px;
+    }
+    h4 {
+        font-size: calc(1rem * pow(1.15, 3));
+        font-size: 22px;
+    }
+    h3 {
+        font-size: calc(1rem * pow(1.15, 4));
+        font-size: 24px;
+    }
+    h2 {
+        font-size: calc(1rem * pow(1.15, 5));
+        font-size: 30px;
+    }
+    h1 {
+        font-size: calc(1rem * pow(1.15, 6));
+        font-size: 38px;
+    }
+}
