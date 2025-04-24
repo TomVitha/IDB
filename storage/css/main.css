@@ -85,7 +85,6 @@
 }
 
 html {
-    /* overflow-x: hidden; */
     scroll-behavior: smooth;
 }
 
@@ -114,7 +113,7 @@ a {
     font-weight: 700;
 }
 
-:where(p, li) > a:hover{
+:where(main :is(p, li)) > a:hover{
     text-decoration: underline;
 }
 
@@ -133,21 +132,18 @@ menu {
     list-style-type: none;
 }
 
-picture,
-img {
+img, picture, svg, video, canvas {
     display: block;
     max-width: 100%;
     -webkit-user-select: none;
     user-select: none;
-    /* -webkit-user-drag: none; */
+    font-style: italic;
 }
-
 
 figure {
     position: relative;
     margin: 0;
 }
-
 
 /* Prevent <sub> and <sup> elements from affecting the line height */
 sub,
@@ -197,7 +193,7 @@ dl {
     margin: initial;
 }
 
-/* ? maybe ? */
+/** Details open transition **/
 details {
     overflow: hidden;
 }
@@ -233,7 +229,6 @@ details:open::details-content {
     height: 100%;
 }
 
-
 .container--breakout {
     margin-left: calc((100vw - 100% - 0px)* -1 / 2);
     width: calc(100vw - 0px);
@@ -261,13 +256,6 @@ body {
     transition: none;
     white-space: normal;
     border: none;
-
-    /* oh if only... */
-    /* border-radius: 6px;
-    padding: 0.5rem 1.25rem;
-    font-weight: 500;
-    text-transform: none;
-    font-size: 0.875rem; */
 }
 
 .btn.btn--primary {
@@ -282,8 +270,6 @@ body {
     position: relative;
     line-height: 1.0;
     font-weight: 700;
-    /* ? maybe */
-    /* text-box: trim-both cap alphabetic; */
 }
 
 h1 {
@@ -294,108 +280,35 @@ h1 {
     gap: 1.5rem;
 }
 
-h1 strong {
-    font-weight: 800;
-}
-:is(h1, h2, h3, h4, h5, h6) b {
-    font-size: 1.6em;
-    vertical-align: sub;
-}
-:is(h1, h2, h3, h4, h5, h6) small {
-    font-size: 1.25rem;
-    font-weight: 400;
-    line-height: 1.25;
-    letter-spacing: -0.001em;
 
-    /* ! debug */
-    /* color: cyan !important; */
-    display: block;
-    margin-block: 0.5rem;
-}
+
 
 
 h2 {
     font-size: 2.75rem;
-    margin-top: 2.5rem;
-    margin-bottom: 1.5rem;
     font-weight: 800;
-    /* ? maybe ? */
-    text-wrap: balance;
     /* ! debug */
     /* color: firebrick !important; */
 }
 
-h2 a{
-    text-decoration: none;
-}
+
 
 h3 {
     font-size: 1.75rem;
     font-weight: 775;
-    margin-top: 2.25rem;
-    margin-bottom: 1.5rem;
     /* ! debug */
     /* color: blue !important; */
 }
 
-/* ? maybe  */
-li h3 {
-    margin-bottom: 1rem;
-}
 
 h4 {
     font-size: 1.25rem;
-    margin-top: 1.75rem;
-    margin-bottom: 1rem;
 }
 
 h5 {
-    margin-block: 0.25rem;
+    /* margin-block: 0.25rem; */
 }
 
-:is(h1, h2, h3, h4, h5, h6):first-child{
-    margin-top: 0;
-}
-:is(h1, h2, h3, h4, h5, h6):last-child{
-    margin-bottom: 0;
-}
-
-/**  text-behind **/
-/* TODO: Refactor text-behind positioning */
-[data-text-behind]:not([data-text-behind=""]) {
-    position: relative;
-    display: block;
-    /* Note: Difference in text-behind size and primary text size -> half that +- offset */
-    /* Note: Positioning breaks when primary text larger than text behind */
-    padding-top: calc(((var(--font-size-text-behind, 9rem) - 1em) / 2) + 0.5rem);
-    min-height: var(--font-size-text-behind, 9rem);
-    /* ! debug */
-    /* background: rgba(255, 0, 0, 0.2); */
-
-}
-/* ? reduce specificity ? */
-[data-text-behind]:not([data-text-behind=""])::before {
-    content: attr(data-text-behind);
-    color: var(--color-text-behind);
-    position: absolute;
-    top: 0;
-    translate: -40px 0;
-    font-size: var(--font-size-text-behind, 9rem);
-    font-weight: 700;
-    line-height: 1;
-    white-space: nowrap;
-    z-index: -1;
-    /* ! debug */
-    /* background: rgba(0, 0, 128, 0.2); */
-    /* ? maybe */
-    /* text-box: trim-both cap alphabetic; */
-}
-
-@media screen and (max-width: 1199px) {
-    [data-text-behind]:not([data-text-behind=""])::before {
-        translate: -15px 0;
-    }
-}
 
 /** HEADINGS MOBILE QUERIES **/
 @media (max-width: 767px) {
@@ -413,9 +326,85 @@ h5 {
     }
 }
 
-/* ! TESTING */
-#dev-cms-content main :last-child {
-    /* margin-bottom: 0; */
+:is(h1, h2, h3, h4, h5, h6):first-child{
+    margin-top: 0;
+}
+:is(h1, h2, h3, h4, h5, h6):last-child{
+    margin-bottom: 0;
+}
+
+:is(h1, h2, h3, h4, h5, h6) b {
+    font-size: 1.6em;
+    /* ? maybe */
+    vertical-align: sub;
+}
+:is(h1, h2, h3, h4, h5, h6) small {
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: 1.25;
+    letter-spacing: -0.001em;
+
+    /* ! debug */
+    /* color: cyan !important; */
+    display: block;
+    margin-block: 0.5rem;
+}
+
+:is(h1, h2, h3, h4, h5, h6) a{
+    text-decoration: none;
+}
+
+h1 strong {
+    font-weight: 800;
+}
+
+/* Red bg block */
+:is(h1, h2, h3, h4, h5, h6).em {
+    color: white;
+    background-color: var(--color-primary);
+    padding: 0.55em 0.9em;
+    width: fit-content;
+}
+
+/**  text-behind **/
+/* TODO: Refactor text-behind positioning */
+[data-text-behind]:not([data-text-behind=""]) {
+    position: relative;
+    display: block;
+    /* Note: Difference in text-behind size and primary text size -> half that +- offset */
+    /* Note: Positioning breaks when primary text larger than text behind (>9rem) */
+    padding-top: calc(((var(--font-size-text-behind, 9rem) - 1em) / 2) + 0.5rem);
+    /* Note: Height at least text-behind +- vertical empty space compensation */
+    min-height: calc(var(--font-size-text-behind, 9rem) - 0.5rem);
+    /* ! debug */
+    /* background: rgba(255, 0, 0, 0.2); */
+    /* ? maybe - testing */
+    /* Note: This version compensates for reduced line-height */
+    padding-top: calc(((var(--font-size-text-behind, 9rem) * 0.7 - 1em) / 2) + 0.5rem);
+    min-height: calc(var(--font-size-text-behind, 9rem) * 0.7);
+}
+/* ? reduce specificity ? */
+[data-text-behind]:not([data-text-behind=""])::before {
+    content: attr(data-text-behind);
+    color: var(--color-text-behind);
+    position: absolute;
+    top: 0;
+    translate: -40px 0;
+    font-size: var(--font-size-text-behind, 9rem);
+    font-weight: 700;
+    line-height: 1;
+    white-space: nowrap;
+    z-index: -1;
+    /* ! debug */
+    /* background: rgba(0, 0, 128, 0.2); */
+    /* ? maybe - testing */
+    line-height: 0.7;
+}
+
+@media screen and (max-width: 1199px) {
+    [data-text-behind]:not([data-text-behind=""])::before {
+        translate: -15px 0;
+    }
 }
 
 
@@ -446,9 +435,7 @@ hr {
 .perex {
     font-size: 1.125rem;
     font-weight: 550;
-    /* ? maybe ? */
-    color: #111111;
-    margin-bottom: 1.5rem;
+    color: var(--color-near-black);
 }
 
 .header__content {
@@ -482,9 +469,9 @@ section {
     overflow-x: hidden;
     overflow-x: clip;
     scroll-margin-top: 4.0rem;
-    padding-block: 4.0rem;
+    /* padding-block: 4.0rem; */
     /* ! testing */
-    padding-block: 1.75rem;
+    padding-block: 2.0rem;
 }
 
 /** Avoid duplicating visual gap (padding) between transparent sections **/
@@ -510,6 +497,16 @@ section>section:first-child {
 }
 section>section:last-child {
     padding-bottom: 0;
+}
+
+/* Section following hero */
+.hero + section {
+    padding-top: 3rem;
+}
+
+/* Section preceding hero */
+section:has(+ .hero) {
+    padding-bottom: 5rem;
 }
 
 /** Sub-sections **/
@@ -736,25 +733,22 @@ header a:hover {
     --list-marker-img: none;
     --list-marker-size: 0px;
     --list-marker-gap: 1rem;
-
     display: flex;
     flex-direction: column;
     row-gap: 0.75rem;
     font-size: inherit;
     padding: 0rem;
-    margin-top: 1rem;
-    /* ? maybe ? */
-    margin-left: 12px;
+    margin-left: min(12px, 1%);
 }
 
 /* Nested list */
 .list .list {
-    row-gap: 0.25rem;
-    margin-block: 0.25rem 0rem;
+    row-gap: 0.5rem;
+    margin-block: 0.5rem 0rem;
 }
 
 .list + .list {
-    margin-top: 1.5rem;
+    /* margin-top: 1.5rem; */
 }
 
 .list > li{
@@ -766,6 +760,7 @@ header a:hover {
 
 /* Default CSS marker */
 .list > li::marker {
+    /* ? maybe ? */
     color: var(--color-primary);
 }
 
@@ -830,7 +825,7 @@ header a:hover {
     counter-reset: counter-number;
     list-style-type: none;
     padding-left: 4.0rem;
-    row-gap: 1rem;
+    row-gap: 1.5rem;
 }
 
 .trapezoid > li{
@@ -899,7 +894,6 @@ header a:hover {
 }
 
 /** Letters Counter **/
-/* ! todo - fix marker positioning, gap */
 .counter-letters{
     counter-reset: counter-letters;
 }
@@ -913,7 +907,6 @@ header a:hover {
 }
 
 /** Alpha Counter **/
-/* ! todo - fix marker positioning, gap */
 .counter-alpha{
     counter-reset: counter-alpha;
 }
@@ -930,7 +923,7 @@ header a:hover {
 .cols-2 {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 16px 32px;
+    gap: 24px;
 }
 
 @media screen and (max-width: 767px) {
@@ -939,14 +932,11 @@ header a:hover {
     }
 }
 
-.cols-2:has(h4) {
-    margin-top: 1.75rem;
-}
-
 /* # TABLE */
 .table-wrapper {
     max-width: 100%;
     overflow-x: auto;
+    margin-top: 2rem;
 }
 
 table {
@@ -955,7 +945,7 @@ table {
     table-layout: fixed;
     line-height: 1.15;
     background-color: #ececec;
-    margin-bottom: 1.5rem;
+    margin: 0;
     caption-side: bottom;
     /* ? MAYBE */
     /* word-break: break-word; */
@@ -1009,19 +999,16 @@ table caption {
 
 .member{
     width: 130px;
-    margin-bottom: 1rem;
 }
 
 .member img{
     aspect-ratio: 4/3;
-    margin-bottom: 0.5rem;
     margin-inline: auto;
 }
 
-/* ? maybe ? */
 figcaption {
     line-height: 1.15;
-    margin-top: 1rem;
+    margin-block: 1rem;
     /* ! debug */
     /* color: limegreen !important; */
 }
@@ -1030,10 +1017,7 @@ figcaption {
 figcaption small{
     line-height: 1.15;
     font-family: 'Exo 2 Condensed', 'Exo 2', 'Roboto', sans-serif;
-    /* margin-top: 0.5rem; */
-    /* text-align: center; */
     text-decoration: none;
-    /* font-size: 0.875rem; */
 }
 
 figcaption a {
@@ -1047,10 +1031,6 @@ figcaption a {
     }
     .member{
         width: 100px;
-        margin-bottom: 0;
-    }
-    .member img{
-        margin-bottom: 0;
     }
 }
 
@@ -1085,13 +1065,14 @@ figcaption a {
 }
 
 
-
+/* # HERO */
 .hero{
     --hero-bg-overlay: linear-gradient(0deg, #c8d0d5eb 0%, #c8d0d5eb 100%);
     background: no-repeat center center/cover;
     background-image: var(--hero-bg-overlay), url('https://iniciativa-bydleni.cz/storage/IDB/img/backgrounds/bg-hero_3840.jpg');
     color: var(--color-primary);
     position: relative;
+    height: 600px;
     padding: 80px 0 56px;
     overflow: visible;
     isolation: isolate;
@@ -1107,18 +1088,30 @@ figcaption a {
     justify-content: center;
 }
 
-.hero .logo{
-    width: 225px;
+.hero.composite{
+    --hero-bg: url('/img/backgrounds/bg-hero-wall_3300.jpg');
+    /** Transparent fallback if no fg given **/
+    /* Note: Needs to be a gradient - can't be simple solid */
+    --hero-fg: linear-gradient(0deg, transparent 0%, transparent 100%);
+    background-position: calc(50vw - 200px) center, center;
+    background-image: var(--hero-fg), var(--hero-bg);
+    background-size: auto 100%, cover;
+    background-blend-mode: multiply, normal;
+    background-repeat: no-repeat;
+    padding: 0;
 }
 
-@media screen and (max-width: 767px) {
-    .hero {
-        padding-top: 42px;
-    }
-    /* .hero__content{
-        padding-top: 1.5rem;
-        gap: 2.5rem;
-    }   */
+.hero h1 {
+    max-width: 45rem;
+    font-weight: 300;
+}
+
+/* ? maybe keep */
+.composite h1 {
+    max-width: 520px;
+}
+.composite h1 br {
+    display: none;
 }
 
 .hero__buttons {
@@ -1127,21 +1120,19 @@ figcaption a {
     gap: 0.5rem 1rem;
 }
 
-/** two layers - bg + fg - multiply blend **/
-.hero.composite{
-    --hero-bg: url('/img/backgrounds/bg-hero-wall_3300.jpg');
-    /** Transparent fallback if no fg given **/
-    --hero-fg: linear-gradient(0deg, transparent 0%, transparent 100%);
-    background-position: calc(50vw - 200px) center, center;
-    background-image: var(--hero-fg), var(--hero-bg);
-    background-size: auto 100%, cover;
-    background-blend-mode: multiply, normal;
-    background-repeat: no-repeat;
-    height: 600px;
-    padding: 0;
+@media screen and (max-width: 991px){
+    .hero.composite {
+        height: 450px;
+        background-size: auto 450px, cover;
+        background-position: calc(100% + 175px) 100%, center;
+    }
 }
 
 @media screen and (max-width: 767px) {
+    .hero {
+        height: auto;
+        padding-top: 42px;
+    }
     .hero.composite {
         height: 450px;
         background-size: auto 350px, cover;
@@ -1150,21 +1141,7 @@ figcaption a {
     .hero.composite .hero__content {
         padding-block: 38px;
         justify-content: start;
-        /* text-align: center; */
     }
-}
-
-.hero h1 {
-    max-width: 45rem;
-    font-weight: 300;
-}
-
-/* ! temp testing */
-.composite h1 {
-    max-width: 550px;
-}
-.composite h1 br {
-    display: none;
 }
 
 
@@ -1214,13 +1191,11 @@ figcaption a {
     margin-inline: auto;
 }
 
-article.wall {
+.wall {
     --color-text-behind: #fefefe;
     background: no-repeat center center/cover;
     background-image: var(--wall-bg-overlay), url('https://iniciativa-bydleni.cz/storage/IDB/img/backgrounds/texture-wall_2000.jpg');
-    font-size: 18px;
-    line-height: 1.25;
-    margin-block: 1.5rem;
+    /* margin-block: 1.5rem; */
     padding: 1.5rem min(2.5rem, 5%);
     position: relative;
     isolation: isolate;
@@ -1240,7 +1215,6 @@ article.wall {
     padding: 1.0rem min(1.5rem, 5%);
     position: relative;
     isolation: isolate;
-    /** i hate this, but what comes next is worse **/
     display: flex;
     align-items: center;
     flex-direction: row;
@@ -1268,25 +1242,18 @@ article.wall {
 
 @media screen and (max-width: 767px) {
     .wall-headings h3 {
-        display: block;
+        /* display: block; */
     }
     .wall-headings h3::before {
-        font-size: 2.25rem;
+        font-size: 2.0rem;
         margin-left: -0.333em;
         margin-right: 1rem;
-        /* align-self: start; */
-        /** i hate that i have to do this, but the devil will understand **/
-        float: left;
+        align-self: start;
+        /* float: left; */
     }
 }
 
-/* Red bg block */
-:is(h1, h2, h3, h4, h5, h6).em {
-    color: white;
-    background-color: var(--color-primary);
-    padding: 0.55em 0.9em;
-    width: fit-content;
-}
+
 
 footer{
     padding-block: 1.5rem;
@@ -1329,6 +1296,11 @@ footer .logo{
     background-position: right center, center, center;
     background-size: auto 300px, cover, cover;
     padding: 2rem min(2.5rem, 5%);
+
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 1.0rem;
 }
 
 .banner-form h2 {
@@ -1336,7 +1308,7 @@ footer .logo{
 }
 
 .banner-form .btn {
-    margin-top: 1rem;
+    /* margin-top: 1rem; */
 }
 
 @media screen and (max-width: 991px) {
@@ -1359,10 +1331,6 @@ blockquote,
     background: no-repeat center center/cover;
     background-image: var(--wall-bg-overlay), url('https://iniciativa-bydleni.cz/storage/IDB/img/backgrounds/texture-wall_2000.jpg');
     line-height: 1.25;
-    /* ! figure out text coloring */
-    /* color: var(--color-primary); */
-    /* color: var(--color-near-black, #070707); */
-    /* font-weight: 550; */
     font-style: normal;
     margin-block: 1.75rem;
     padding: 1.5rem min(2.5rem, 5%);
@@ -1381,7 +1349,8 @@ blockquote,
 
 .magazine {
     background-color: #e8e8e8;
-    padding-inline: min(50px, 5%);
+    padding-inline: min(2.5rem, 5%);
+    isolation: isolate;
 }
 
 
@@ -1411,7 +1380,6 @@ blockquote,
     grid-template-columns: 1fr 1fr;
     gap: 2.5rem;
     padding: 5.5rem min(2.5rem, 5%) 2.5rem;
-    margin-top: 2rem;
     background: no-repeat center center / cover;
     position: relative;
 }
@@ -1430,7 +1398,7 @@ blockquote,
     background-color: var(--color-primary);
     top: -8px;
     left: -8px;
-    margin: 0;
+    /* margin: 0; */
     color: white;
     font-family: inherit;
     padding: 0.4em 1.25em 0.4em 0.75em;
@@ -1448,7 +1416,7 @@ blockquote,
 @media screen and (max-width: 767px) {
     .types {
         grid-template-columns: 1fr;
-        margin-top: 3rem;
+        /* margin-top: 3rem; */
     }
 }
 
@@ -1491,6 +1459,31 @@ blockquote,
 
 .bw {
     filter: saturate(0);
+}
+
+.centered {
+    text-align: center;
+    margin-inline: auto;
+}
+
+.img-large {
+    max-width: 100%;
+    object-fit: cover;
+    object-position: center;
+    background-position: center;
+    background-size: cover;
+    margin-inline: auto;
+    /* ? maybe */
+    margin-block: 2rem;
+}
+
+@media screen and (min-width: 992px) {
+    .float-left {
+        float: left;
+    }
+    .float-right {
+        float: right;
+    }
 }
 
 /** HIDE Chat **/
@@ -1550,71 +1543,80 @@ dialog::-webkit-backdrop {
 }
 
 
-/* ! TEMP */
-/* ! TYPOGRAPHY ADJUSTMENTS TESTING */
-* {
+/* ! TEMP - Preview only */
+*:not([class*="fa-"]) {
     /* font-family: 'Inter', 'Poppins', 'Roboto', 'Arial', sans-serif !important; */
 }
-h6 {
-    font-size: calc(1rem * pow(1.20, 1));
-    font-size: 20px;
-    margin-top: 1.25rem;
-    /* color: yellow !important; */
-}
-h5 {
-    font-size: calc(1rem * pow(1.20, 2));
-    font-size: 24px;
-    margin-top: 1.5rem;
-    /* color: magenta !important; */
-}
-h4 {
-    font-size: calc(1rem * pow(1.20, 3));
-    font-size: 28px;
-    /* color: cyan !important; */
-}
-h3 {
-    font-size: calc(1rem * pow(1.20, 4));
-    font-size: 34px;
-    font-size: 32px;
-    font-weight: 700;
+/*  ! HEADINS SIZES REWORK */
+:is(h1, h2, h3, h4, h5, h6) {
+    /* font-weight: 700; */
     margin-bottom: 1rem;
-    /* color: blue !important; */
+    margin-top: 1.5em;
+}
+h1 {
+    font-size: calc(1rem * pow(1.20, 6));
+    font-size: 52px;
+    font-size: 3.25rem;
+    font-weight: 800;
+    /* color: red !important; */
 }
 h2 {
     font-size: calc(1rem * pow(1.20, 5));
     font-size: 40px;
+    font-size: 2.5rem;
+    font-weight: 800;
     /* color: green !important; */
 }
-h1 {
-    font-size: calc(1rem * pow(1.20, 6));
-    font-size: 48px;
-    font-weight: 800;
-    /* color: red !important; */
+h3 {
+    font-size: calc(1rem * pow(1.20, 4));
+    font-size: 32px;
+    font-size: 2rem;
+    font-weight: 700;
+    /* color: blue !important; */
+}
+h4 {
+    font-size: calc(1rem * pow(1.20, 3));
+    font-size: 28px;
+    font-size: 1.75rem;
+    /* color: cyan !important; */
+}
+h5 {
+    font-size: calc(1rem * pow(1.20, 2));
+    font-size: 24px;
+    font-size: 1.5rem;
+    /* color: magenta !important; */
+}
+h6 {
+    font-size: calc(1rem * pow(1.20, 1));
+    font-size: 20px;
+    font-size: 1.25rem;
+    /* color: yellow !important; */
 }
 
+
 @media screen and (max-width: 767px) {
-    h6 {
-        font-size: calc(1rem * pow(1.15, 1));
-        font-size: 18px;
-    }
-    h5 {
-        font-size: calc(1rem * pow(1.15, 2));
-        font-size: 20px;
-    }
-    h4 {
-        font-size: calc(1rem * pow(1.15, 3));
-        font-size: 22px;
-    }
-    h3 {
-        font-size: calc(1rem * pow(1.15, 4));
-        font-size: 24px;
+    h1 {
+        font-size: calc(1rem * pow(1.15, 6));
+        font-size: 38px;
     }
     h2 {
         font-size: calc(1rem * pow(1.15, 5));
         font-size: 30px;
     }
-    h1 {
-        font-size: calc(1rem * pow(1.15, 6));
-        font-size: 38px;
+    h3 {
+        font-size: calc(1rem * pow(1.15, 4));
+        font-size: 24px;
+    }
+    h4 {
+        font-size: calc(1rem * pow(1.15, 3));
+        font-size: 22px;
+    }
+    h5 {
+        font-size: calc(1rem * pow(1.15, 2));
+        font-size: 20px;
+    }
+    h6 {
+        font-size: calc(1rem * pow(1.15, 1));
+        font-size: 18px;
     }
 }
