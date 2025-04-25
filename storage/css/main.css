@@ -37,20 +37,17 @@
 }
 
 :root {
+    /** COLORS **/
     --color-yellow: #ffed00;
-
-    /* ? OR "bordeaux" */
     --color-bordeaux: #7a0038;
-
     --color-blue: #20234c;
     --color-blue-dark: #0e1237;
-
+    /* Grays */
     --color-gray: #e8e8e8;
     --color-gray-dark: #4D4D4D;
     --color-text-behind: #f0f1f2;
     --color-near-black: #070707;
-
-    /* --color-accent: var(--color-bordeaux, #7a0038); */
+    /* Theme */
     --color-primary: var(--color-bordeaux, #7a0038);
     --color-secondary: #a26578;
     --color-tertiary: #ffffff;
@@ -58,12 +55,12 @@
     --color-pros: #134013;
     --color-cons: var(--color-bordeaux, #7a0038);
 
+    --font-size-text-behind: 9rem;
+    --wall-bg-overlay: linear-gradient(0deg, #ffffffb3 0%, #ffffffb3 100%);
+
+    /** Non-variables **/
     accent-color: var(--color-primary, var(--color-bordeaux, #7a0038));
     interpolate-size: allow-keywords;
-
-    --font-size-text-behind: 9rem;
-
-    --wall-bg-overlay: linear-gradient(0deg, #ffffffb3 0%, #ffffffb3 100%);
 }
 
 
@@ -76,8 +73,7 @@
     box-sizing: border-box;
 }
 
-/* ? temp ? */
-*:focus-visible{
+:focus-visible{
     outline: 3px solid #56b6ffc0;
     outline-offset: 0px;
     /* border: none; */
@@ -270,45 +266,45 @@ body {
     position: relative;
     line-height: 1.0;
     font-weight: 700;
+    margin-bottom: 1rem;
+    margin-top: 1.5em;
 }
 
 h1 {
-    font-size: 3.5rem;
+    font-size: 3.25rem;
+    font-weight: 800;
     line-height: 1.10;
     word-break: break-word;
     text-wrap: balance;
     gap: 1.5rem;
+    /* color: red !important; */
 }
-
-
-
-
 
 h2 {
-    font-size: 2.75rem;
+    font-size: 2.5rem;
     font-weight: 800;
-    /* ! debug */
-    /* color: firebrick !important; */
+    /* color: green !important; */
 }
 
-
-
 h3 {
-    font-size: 1.75rem;
-    font-weight: 775;
-    /* ! debug */
+    font-size: 2rem;
     /* color: blue !important; */
 }
 
-
 h4 {
-    font-size: 1.25rem;
+    font-size: 1.75rem;
+    /* color: cyan !important; */
 }
 
 h5 {
-    /* margin-block: 0.25rem; */
+    font-size: 1.5rem;
+    /* color: magenta !important; */
 }
 
+h6 {
+    font-size: 1.25rem;
+    /* color: yellow !important; */
+}
 
 /** HEADINGS MOBILE QUERIES **/
 @media (max-width: 767px) {
@@ -316,13 +312,22 @@ h5 {
         --font-size-text-behind: 4.5rem;
     }
     h1 {
-        font-size: 2.25rem;
+        font-size: 2.375rem;
     }
     h2 {
-        font-size: 1.75rem;
+        font-size: 1.875rem
     }
     h3 {
         font-size: 1.5rem;
+    }
+    h4 {
+        font-size: 1.375rem;
+    }
+    h5 {
+        font-size: 1.25rem;
+    }
+    h6 {
+        font-size: 1.125rem;
     }
 }
 
@@ -335,7 +340,6 @@ h5 {
 
 :is(h1, h2, h3, h4, h5, h6) b {
     font-size: 1.6em;
-    /* ? maybe */
     vertical-align: sub;
 }
 :is(h1, h2, h3, h4, h5, h6) small {
@@ -343,9 +347,6 @@ h5 {
     font-weight: 400;
     line-height: 1.25;
     letter-spacing: -0.001em;
-
-    /* ! debug */
-    /* color: cyan !important; */
     display: block;
     margin-block: 0.5rem;
 }
@@ -371,19 +372,14 @@ h1 strong {
 [data-text-behind]:not([data-text-behind=""]) {
     position: relative;
     display: block;
-    /* Note: Difference in text-behind size and primary text size -> half that +- offset */
+    /** Calc explanation: Difference in text-behind size and primary text size, half that and +- offset **/
+    /* Note: 0.7 compensates for reduced line-height */
     /* Note: Positioning breaks when primary text larger than text behind (>9rem) */
-    padding-top: calc(((var(--font-size-text-behind, 9rem) - 1em) / 2) + 0.5rem);
-    /* Note: Height at least text-behind +- vertical empty space compensation */
-    min-height: calc(var(--font-size-text-behind, 9rem) - 0.5rem);
-    /* ! debug */
-    /* background: rgba(255, 0, 0, 0.2); */
-    /* ? maybe - testing */
-    /* Note: This version compensates for reduced line-height */
     padding-top: calc(((var(--font-size-text-behind, 9rem) * 0.7 - 1em) / 2) + 0.5rem);
+    /* Note: Height at least text-behind */
     min-height: calc(var(--font-size-text-behind, 9rem) * 0.7);
 }
-/* ? reduce specificity ? */
+/* ? maybe reduce specificity ? */
 [data-text-behind]:not([data-text-behind=""])::before {
     content: attr(data-text-behind);
     color: var(--color-text-behind);
@@ -392,13 +388,9 @@ h1 strong {
     translate: -40px 0;
     font-size: var(--font-size-text-behind, 9rem);
     font-weight: 700;
-    line-height: 1;
+    line-height: 0.7;
     white-space: nowrap;
     z-index: -1;
-    /* ! debug */
-    /* background: rgba(0, 0, 128, 0.2); */
-    /* ? maybe - testing */
-    line-height: 0.7;
 }
 
 @media screen and (max-width: 1199px) {
@@ -421,13 +413,11 @@ p:last-child {
     margin-bottom: 0;
 }
 
-p:has(+section) {
-    margin-bottom: 0;
-}
 
 hr {
     height: 1px;
-    background-color: var(--color-primary);   
+    /* background-color: var(--color-primary);    */
+    background-color: currentColor;
     border: none;
     margin-block: 1.5rem;
 }
@@ -469,52 +459,36 @@ section {
     overflow-x: hidden;
     overflow-x: clip;
     scroll-margin-top: 4.0rem;
-    /* padding-block: 4.0rem; */
-    /* ! testing */
-    padding-block: 2.0rem;
+    margin-block: 4.0rem;
 }
 
-/** Avoid duplicating visual gap (padding) between transparent sections **/
+/* Subsequent transparent sections */
+/* Note: Avoid duplicating visual gap (padding) between transparent sections */
 section:not([class*="bg-"])+section:not([class*="bg-"]) {
     /* ! temp off */
     /* padding-top: 0; */
 }
 
-/* Section w/ bg */
+/* Section with bg */
 section:where([class*="bg-"]) {
-    /* margin-block: 0; */
-    padding-block: 4.0rem;
+    margin-block: 0;
+    padding-block: 3rem;
 }
 
-@media (max-width: 991px) {
-    section{
-        padding-block: 2.0rem;
-    }
-}
-
-section>section:first-child {
-    padding-top: 0;
-}
-section>section:last-child {
-    padding-bottom: 0;
-}
-
-/* Section following hero */
-.hero + section {
-    padding-top: 3rem;
-}
-
-/* Section preceding hero */
-section:has(+ .hero) {
-    padding-bottom: 5rem;
-}
 
 /** Sub-sections **/
 section section {
     overflow: visible;
-    /* ! debug */
-    /* background-color: rgba(0,255,0,0.15); */
-    padding-block: 1.5rem;
+    margin-block: 2.75rem;
+}
+
+@media (max-width: 991px) {
+    section{
+        margin-block: 2.75rem;
+    }
+    section section {
+        margin-block: 2.0rem;
+    }
 }
 
 /** Section colors **/
@@ -551,8 +525,6 @@ section section {
 
 strong {
     font-weight: 700;
-    /* ! debug */
-    /* color: cornflowerblue !important; */
 }
 
 
@@ -560,8 +532,6 @@ em {
     font-style: normal;
     font-weight: 700;
     color: var(--color-bordeaux, #7a0038);
-    /* ! debug */
-    /* color: violet !important; */
 }
 
 /* # UNDERLINES */
@@ -586,7 +556,7 @@ em {
 }
 
 /* * Animated underline (transitions, multiline)  */
-/* ! Multiline-underline may not work when flex child ?? */
+/* ! Multiline-underline may not work when flex child */
 .underline-animated {
   --underline-height: 2px;
   background-image: linear-gradient(transparent, transparent), linear-gradient(currentColor, currentColor);
@@ -824,7 +794,8 @@ header a:hover {
 .trapezoid{
     counter-reset: counter-number;
     list-style-type: none;
-    padding-left: 4.0rem;
+    padding-left: 3.0rem;
+    margin-left: 0;
     row-gap: 1.5rem;
 }
 
@@ -936,19 +907,25 @@ header a:hover {
 .table-wrapper {
     max-width: 100%;
     overflow-x: auto;
+    overflow-y: hidden;
     margin-top: 2rem;
 }
 
 table {
     color: black;
-    width: 100%;
-    table-layout: fixed;
     line-height: 1.15;
     background-color: #ececec;
     margin: 0;
     caption-side: bottom;
-    /* ? MAYBE */
-    /* word-break: break-word; */
+}
+
+table.fixed {
+    table-layout: fixed;
+    width: 100%;
+}
+
+table.baseline tbody :is(td, th) {
+    vertical-align: baseline;
 }
 
 th {
@@ -956,7 +933,7 @@ th {
 }
 :is(td, th) {
     position: relative;
-    /* ? maybe disable border-collapse ? */
+    /* ? maybe use "border-collapse: separate" instead*/
     border: 2px solid white;
     padding: 0.5em 0.75em;
 }
@@ -1009,8 +986,6 @@ table caption {
 figcaption {
     line-height: 1.15;
     margin-block: 1rem;
-    /* ! debug */
-    /* color: limegreen !important; */
 }
 
 /** Condensed figcaption **/
@@ -1034,6 +1009,16 @@ figcaption a {
     }
 }
 
+hr[data-text]::before {
+    content: attr(data-text);
+    position: absolute;
+    left: 50%;
+    translate: -50% 0%;
+    background-color: white;
+    padding-inline: 10px;
+}
+
+hr,
 .hr-text {
     display: flex;
     flex-direction: row;
@@ -1042,6 +1027,7 @@ figcaption a {
     font-family: 'Exo 2 Condensed', 'Exo 2', 'Roboto', sans-serif;
     margin-block: 1.0rem;
     text-align: center;
+    line-height: 1;
 }
 .hr-text:before, 
 .hr-text:after{
@@ -1089,10 +1075,9 @@ figcaption a {
 }
 
 .hero.composite{
-    --hero-bg: url('/img/backgrounds/bg-hero-wall_3300.jpg');
-    /** Transparent fallback if no fg given **/
-    /* Note: Needs to be a gradient - can't be simple solid */
+    /* Note: This is a transparent default 'image'. It needs to be a gradient to be considered an 'image', can't be a 'color' */
     --hero-fg: linear-gradient(0deg, transparent 0%, transparent 100%);
+    --hero-bg: url('/img/backgrounds/bg-hero-wall_3300.jpg');
     background-position: calc(50vw - 200px) center, center;
     background-image: var(--hero-fg), var(--hero-bg);
     background-size: auto 100%, cover;
@@ -1107,12 +1092,8 @@ figcaption a {
 }
 
 /* ? maybe keep */
-.composite h1 {
-    max-width: 520px;
-}
-.composite h1 br {
-    display: none;
-}
+.composite h1 { max-width: 520px; }
+.composite h1 br { display: none; }
 
 .hero__buttons {
     display: flex;
@@ -1144,11 +1125,14 @@ figcaption a {
     }
 }
 
-
 .showcases{
     display: flex;
     flex-direction: column;
     gap: 4rem;
+    position: relative;
+}
+
+.showcases__row{
     position: relative;
 }
 
@@ -1160,18 +1144,20 @@ figcaption a {
     justify-items: center;
 }
 
-/* iOS fix: baseline breaks first row's height (appleee!) */
+/* iOS fix: baseline breaks first row's height */
 @supports (-webkit-touch-callout: none) {
     .showcase {
         align-items: center;
     }
 }
 
-.showcases__row{
-    position: relative;
+.showcase.center {
+    align-items: stretch;
 }
 
-.showcases__row:not(:first-child)::before{
+
+/** Line separator **/
+/* .showcases__row:not(:first-child)::before{
     content: '';
     position: absolute;
     height: 1px;
@@ -1179,22 +1165,25 @@ figcaption a {
     background-color: currentColor;
     bottom: calc(100% + 2rem);
     display: block;
-}
+} */
 
 .showcase__item{
-    
+    display: flex;
+    flex-direction: column;
 }
 
 .showcase__item img {
     width: 100%;
+    height: 100%;
     object-fit: contain;
     margin-inline: auto;
+    flex: 1;
 }
 
 .wall {
     --color-text-behind: #fefefe;
     background: no-repeat center center/cover;
-    background-image: var(--wall-bg-overlay), url('https://iniciativa-bydleni.cz/storage/IDB/img/backgrounds/texture-wall_2000.jpg');
+    background-image: url('/img/backgrounds/texture-wall-lighter_2000.jpg');
     /* margin-block: 1.5rem; */
     padding: 1.5rem min(2.5rem, 5%);
     position: relative;
@@ -1211,7 +1200,7 @@ figcaption a {
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    background-image: var(--wall-bg-overlay), url('https://iniciativa-bydleni.cz/storage/IDB/img/backgrounds/texture-wall_2000.jpg');
+    background-image: url('/img/backgrounds/texture-wall-lighter_2000.jpg');
     padding: 1.0rem min(1.5rem, 5%);
     position: relative;
     isolation: isolate;
@@ -1236,8 +1225,6 @@ figcaption a {
     padding: 0 0.4em 0 0.75em;
     white-space: nowrap;
     clip-path: polygon(0 0, 100% 0%, 100% 100%, 0.4em 100%);
-    /* ? maybe ? */
-    /* align-self: start; */
 }
 
 @media screen and (max-width: 767px) {
@@ -1281,7 +1268,7 @@ footer .logo{
 
 @media screen and (min-width: 992px) {
     footer{
-        margin-top: 3.5rem;
+        margin-top: 74px;
     }
     footer .logo{
         width: 200px;
@@ -1291,12 +1278,12 @@ footer .logo{
 }
 
 .banner-form {
-    background-image: url('https://iniciativa-bydleni.cz/storage/IDB/img/backgrounds/bg-form-banner.png'), var(--wall-bg-overlay), url('https://iniciativa-bydleni.cz/storage/IDB/img/backgrounds/texture-wall_2000.jpg');
+    background-image: url('https://iniciativa-bydleni.cz/storage/IDB/img/backgrounds/bg-form-banner.png'), url('/img/backgrounds/texture-wall-lighter_2000.jpg');
     background-repeat: no-repeat;
-    background-position: right center, center, center;
-    background-size: auto 300px, cover, cover;
+    background-position: right center, center;
+    background-size: auto 300px, cover;
     padding: 2rem min(2.5rem, 5%);
-
+    margin: 2rem 0;
     display: flex;
     flex-direction: column;
     align-items: start;
@@ -1313,13 +1300,14 @@ footer .logo{
 
 @media screen and (max-width: 991px) {
     .banner-form {
-        background-size: contain, cover, cover;
+        background-size: contain, cover;
     }
 }
 
 @media screen and (max-width: 767px) {
     .banner-form {
-        background-image: var(--wall-bg-overlay), url('https://iniciativa-bydleni.cz/storage/IDB/img/backgrounds/texture-wall_2000.jpg');
+        background-image: url('/img/backgrounds/texture-wall-lighter_2000.jpg');
+        background-size: cover;
     }
     .banner-form h2 {
         max-width: unset;
@@ -1329,7 +1317,7 @@ footer .logo{
 blockquote,
 .quote {
     background: no-repeat center center/cover;
-    background-image: var(--wall-bg-overlay), url('https://iniciativa-bydleni.cz/storage/IDB/img/backgrounds/texture-wall_2000.jpg');
+    background-image: url('/img/backgrounds/texture-wall-lighter_2000.jpg');
     line-height: 1.25;
     font-style: normal;
     margin-block: 1.75rem;
@@ -1349,7 +1337,7 @@ blockquote,
 
 .magazine {
     background-color: #e8e8e8;
-    padding-inline: min(2.5rem, 5%);
+    padding: 1.5rem min(2.5rem, 5%);
     isolation: isolate;
 }
 
@@ -1359,6 +1347,7 @@ blockquote,
     width: 100%;
     height: 700px;
     max-height: 75vh;
+    margin: 1.5rem auto;
 }
 
 .magazine__buttons {
@@ -1366,7 +1355,6 @@ blockquote,
     grid-template-columns: 1fr 1fr;
     text-align: center;
     gap: 0.5rem min(2rem, 5%);
-    padding-block: 1.5rem;
 }
 
 @media screen and (max-width: 767px) {
@@ -1406,7 +1394,7 @@ blockquote,
 }
 
 .types--one {
-    background-image: var(--wall-bg-overlay), url('https://iniciativa-bydleni.cz/storage/IDB/img/backgrounds/texture-wall_2000.jpg');
+    background-image: url('/img/backgrounds/texture-wall-lighter_2000.jpg');
 }
 
 .types--two {
@@ -1427,8 +1415,6 @@ blockquote,
     align-items: start;
     gap: 2.5rem 0;
     padding-inline: min(2.5rem, 5%);
-    /* ! debug */
-    /* background: red; */
 }
 
 /** Alternating - only on desktop **/
@@ -1446,13 +1432,11 @@ blockquote,
     display: flex;
     flex-direction: row;
     align-items: center;
-    /* ? maybe */
     gap: 16px;
     flex-wrap: wrap-reverse;
 }
 
 .alternator img {
-    /* ? dial-in the values */
     max-height: 400px;
     max-width: min(550px, 100%);
 }
@@ -1466,15 +1450,22 @@ blockquote,
     margin-inline: auto;
 }
 
-.img-large {
+.img-large,
+.img-large img {
     max-width: 100%;
     object-fit: cover;
     object-position: center;
     background-position: center;
     background-size: cover;
-    margin-inline: auto;
-    /* ? maybe */
-    margin-block: 2rem;
+    margin: 2rem auto;
+}
+
+.img-thumbnail {
+    padding: 8px;
+    background-color: #fff;
+    /* border: 1px solid #dee2e6; */
+    /* border-radius: 8px; */
+    box-shadow: 0px 0px 8px -2px rgba(0, 0, 0, 0.25);
 }
 
 @media screen and (min-width: 992px) {
@@ -1484,6 +1475,30 @@ blockquote,
     .float-right {
         float: right;
     }
+}
+
+/* Source: https://css-generators.com/ribbon-shapes/ */
+.ribbon {
+    --f: 0px; /* fold */
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: #fff;
+    background-color: #e50514;
+    font-size: 0.875rem;
+    font-weight: bold;
+    text-align: center;
+    line-height: 1.8;
+    padding-inline: 1lh;
+    padding-bottom: var(--f);
+    border-image: conic-gradient(#0008 0 0) 51%/var(--f);
+    clip-path: polygon(
+      100% calc(100% - var(--f)),100% 100%,calc(100% - var(--f)) calc(100% - var(--f)),var(--f) calc(100% - var(--f)), 0 100%,0 calc(100% - var(--f)),999px calc(100% - var(--f) - 999px),calc(100% - 999px) calc(100% - var(--f) - 999px));
+    transform: translate(calc((1 - cos(45deg))*100%), -100%) rotate(45deg);
+    transform-origin: 0% 100%;
+    z-index: 1;
+    /* Note: Ribbon width affects distance from corner. Fixed width maintains distance. */
+    min-width: 10rem
 }
 
 /** HIDE Chat **/
@@ -1541,82 +1556,14 @@ dialog::-webkit-backdrop {
     width: 100% !important;
     height: 100% !important;
 }
-
-
-/* ! TEMP - Preview only */
-*:not([class*="fa-"]) {
-    /* font-family: 'Inter', 'Poppins', 'Roboto', 'Arial', sans-serif !important; */
-}
-/*  ! HEADINS SIZES REWORK */
-:is(h1, h2, h3, h4, h5, h6) {
-    /* font-weight: 700; */
-    margin-bottom: 1rem;
-    margin-top: 1.5em;
-}
-h1 {
-    font-size: calc(1rem * pow(1.20, 6));
-    font-size: 52px;
-    font-size: 3.25rem;
-    font-weight: 800;
-    /* color: red !important; */
-}
-h2 {
-    font-size: calc(1rem * pow(1.20, 5));
-    font-size: 40px;
-    font-size: 2.5rem;
-    font-weight: 800;
-    /* color: green !important; */
-}
-h3 {
-    font-size: calc(1rem * pow(1.20, 4));
-    font-size: 32px;
-    font-size: 2rem;
-    font-weight: 700;
-    /* color: blue !important; */
-}
-h4 {
-    font-size: calc(1rem * pow(1.20, 3));
-    font-size: 28px;
-    font-size: 1.75rem;
-    /* color: cyan !important; */
-}
-h5 {
-    font-size: calc(1rem * pow(1.20, 2));
-    font-size: 24px;
-    font-size: 1.5rem;
-    /* color: magenta !important; */
-}
-h6 {
-    font-size: calc(1rem * pow(1.20, 1));
-    font-size: 20px;
-    font-size: 1.25rem;
-    /* color: yellow !important; */
+/* ? maybe */
+[data-fancybox] {
+    cursor: pointer;
 }
 
 
-@media screen and (max-width: 767px) {
-    h1 {
-        font-size: calc(1rem * pow(1.15, 6));
-        font-size: 38px;
-    }
-    h2 {
-        font-size: calc(1rem * pow(1.15, 5));
-        font-size: 30px;
-    }
-    h3 {
-        font-size: calc(1rem * pow(1.15, 4));
-        font-size: 24px;
-    }
-    h4 {
-        font-size: calc(1rem * pow(1.15, 3));
-        font-size: 22px;
-    }
-    h5 {
-        font-size: calc(1rem * pow(1.15, 2));
-        font-size: 20px;
-    }
-    h6 {
-        font-size: calc(1rem * pow(1.15, 1));
-        font-size: 18px;
-    }
+/* ! DEBUG */
+.alt {
+    /* display: none; */
+    background-color: rgba(0, 255, 128, 0.05);
 }
