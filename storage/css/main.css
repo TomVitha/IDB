@@ -921,7 +921,7 @@ header .logo__wrapper {
 
 .check-marks {
     --list-marker-color: var(--color-primary);
-    --list-marker-img: url('/img/check-mark-primary.svg');
+    --list-marker-img: url('../../img/check-mark-primary.svg');
 }
 
 .check-marks.big {
@@ -930,12 +930,12 @@ header .logo__wrapper {
 
 .pros {
     --list-marker-color: var(--color-pros);
-    --list-marker-img: url('/img/check-mark-green.svg');
+    --list-marker-img: url('../../img/check-mark-green.svg');
 }
 
 .cons {
     --list-marker-color: var(--color-cons);
-    --list-marker-img: url('/img/x-mark-dark-red.svg');
+    --list-marker-img: url('../../img/x-mark-dark-red.svg');
 }
 
 /* Color heading preceding pros/cons list */
@@ -1235,7 +1235,7 @@ hr,
 .hero.composite {
     /* Note: This is a transparent default 'image'. It needs to be a gradient to be considered an 'image', can't be a 'color' */
     --hero-fg: linear-gradient(0deg, transparent 0%, transparent 100%);
-    --hero-bg: url('/img/backgrounds/bg-hero-wall_3300.jpg');
+    --hero-bg: url('../../img/backgrounds/bg-hero-wall_3300.jpg');
     background-position: calc(50vw - 200px) center, center;
     background-image: var(--hero-fg), var(--hero-bg);
     background-size: auto 100%, cover;
@@ -1345,7 +1345,7 @@ hr,
 .wall {
     --color-text-behind: #fefefe;
     background: no-repeat center center/cover;
-    background-image: url('/img/backgrounds/texture-wall-lighter_2000.jpg');
+    background-image: url('../../img/backgrounds/texture-wall-lighter_2000.jpg');
     /* margin-block: 1.5rem; */
     padding: 1.5rem min(2.5rem, 5%);
     position: relative;
@@ -1362,7 +1362,7 @@ hr,
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    background-image: url('/img/backgrounds/texture-wall-lighter_2000.jpg');
+    background-image: url('../../img/backgrounds/texture-wall-lighter_2000.jpg');
     padding: 1.0rem min(1.5rem, 5%);
     position: relative;
     isolation: isolate;
@@ -1434,7 +1434,7 @@ footer {
 }
 
 .banner-form {
-    background-image: url('https://iniciativa-bydleni.cz/storage/IDB/img/backgrounds/bg-form-banner.png'), url('/img/backgrounds/texture-wall-lighter_2000.jpg');
+    background-image: url('https://iniciativa-bydleni.cz/storage/IDB/img/backgrounds/bg-form-banner.png'), url('../../img/backgrounds/texture-wall-lighter_2000.jpg');
     background-repeat: no-repeat;
     background-position: right center, center;
     background-size: auto 300px, cover;
@@ -1462,7 +1462,7 @@ footer {
 
 @media screen and (max-width: 767px) {
     .banner-form {
-        background-image: url('/img/backgrounds/texture-wall-lighter_2000.jpg');
+        background-image: url('../../img/backgrounds/texture-wall-lighter_2000.jpg');
         background-size: cover;
     }
     .banner-form h2 {
@@ -1473,7 +1473,7 @@ footer {
 blockquote,
 .quote {
     background: no-repeat center center/cover;
-    background-image: url('/img/backgrounds/texture-wall-lighter_2000.jpg');
+    background-image: url('../../img/backgrounds/texture-wall-lighter_2000.jpg');
     line-height: 1.25;
     font-style: normal;
     margin-block: 1.75rem;
@@ -1551,7 +1551,7 @@ blockquote,
 }
 
 .types--one {
-    background-image: url('/img/backgrounds/texture-wall-lighter_2000.jpg');
+    background-image: url('../../img/backgrounds/texture-wall-lighter_2000.jpg');
 }
 
 .types--two {
