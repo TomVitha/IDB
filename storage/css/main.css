@@ -1721,10 +1721,9 @@ dialog::-webkit-backdrop {
 
 /* ! DEBUG */
 .alt {
-    /* display: none; */
-    background-color: rgba(0, 255, 128, 0.05);
+    display: none;
+    /* background-color: rgba(0, 255, 128, 0.05); */
 }
-
 /* ! DEBUG */
 main+main {
   margin-top:  6rem;
