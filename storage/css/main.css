@@ -180,8 +180,6 @@ em {
     font-style: normal;
     font-weight: 700;
     color: var(--color-primary, var(--color-bordeaux, #7a0038));
-    /* ? maybe */
-    /* color: var(--color-bordeaux, #7a0038); */
 }
 
 b {
@@ -234,13 +232,12 @@ details:open::details-content {
 }
 
 .container--breakout {
-    margin-left: calc((100vw - 100% - 0px)* -1 / 2);
+    margin-left: calc((100vw - (100% - 0px)) / -2);
     width: calc(100vw - 0px);
 }
 
 body {
     font-family: 'Exo 2', sans-serif;
-    /* color: var(--color-gray-dark); */
     color: var(--color-near-black, #070707);
     line-height: 1.5;
     overflow-x: hidden;
@@ -282,7 +279,7 @@ body {
     z-index: 0;
 
     /* Not ugly design */
-    /* --btn-border-radius: 0.45em; */
+    /* --btn-border-radius: 0.35em; */
     /* font-size: 0.875rem; */
     /* padding: 0.8em 1.25em; */
     /* font-weight: 500; */
@@ -398,7 +395,7 @@ body {
     color: var(--btn-theme);
 }
   
-  /** Transparent **/
+/** Transparent **/
 .btn[class*="--transparent"] {
     background: transparent;
     color: var(--btn-theme);
@@ -407,6 +404,23 @@ body {
 .btn[class*="--transparent"]::before,
 .btn[class*="--transparent"]::after {
     background: transparent;
+}
+
+/** Naked **/
+.btn[class*="--naked"] {
+    padding: 0;
+    min-height: unset;
+    color: var(--btn-theme);
+    background-color: transparent;
+    overflow: visible;
+}
+.btn[class*="--naked"]::after {
+    content: none;
+}
+.btn[class*="--naked"]:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.15em;
 }
 
 /* # HEADINGS */
@@ -426,33 +440,27 @@ h1 {
     word-break: break-word;
     text-wrap: balance;
     gap: 1.5rem;
-    /* color: red !important; */
 }
 
 h2 {
     font-size: 2.5rem;
     font-weight: 800;
-    /* color: green !important; */
 }
 
 h3 {
     font-size: 2rem;
-    /* color: blue !important; */
 }
 
 h4 {
     font-size: 1.75rem;
-    /* color: cyan !important; */
 }
 
 h5 {
     font-size: 1.5rem;
-    /* color: magenta !important; */
 }
 
 h6 {
     font-size: 1.25rem;
-    /* color: yellow !important; */
 }
 
 /** HEADINGS MOBILE QUERIES **/
@@ -508,16 +516,14 @@ h1 strong {
     font-weight: 800;
 }
 
-/* Red bg block */
-:is(h1, h2, h3, h4, h5, h6).em {
+:is(h1, h2, h3, h4, h5, h6).brick {
     color: white;
     background-color: var(--color-primary);
-    padding: 0.55em 0.9em;
+    padding: 0.45em 0.75em;
     width: fit-content;
 }
 
 /**  text-behind **/
-/* TODO: Refactor text-behind positioning */
 [data-text-behind]:not([data-text-behind=""]) {
     position: relative;
     display: block;
@@ -534,7 +540,8 @@ h1 strong {
     color: var(--color-text-behind);
     position: absolute;
     top: 0;
-    translate: -40px 0;
+    /* translate: -40px 0; */
+    translate: -15px 0;
     font-size: var(--font-size-text-behind, 9rem);
     font-weight: 700;
     line-height: 0.7;
@@ -544,7 +551,7 @@ h1 strong {
 
 @media screen and (max-width: 1199px) {
     [data-text-behind]:not([data-text-behind=""])::before {
-        translate: -15px 0;
+        /* translate: -15px 0; */
     }
 }
 
@@ -611,12 +618,6 @@ section {
     margin-block: 5.0rem;
 }
 
-/* Subsequent transparent sections */
-/* Note: Avoid duplicating visual gap (padding) between transparent sections */
-section:not([class*="bg-"])+section:not([class*="bg-"]) {
-    /* ! temp off */
-    /* padding-top: 0; */
-}
 
 /* Section with bg */
 section:where([class*="bg-"]) {
@@ -695,7 +696,7 @@ section section {
 }
 
 /* * Animated underline (transitions, multiline)  */
-/* ! Multiline-underline may not work when flex child */
+/* Note: Multiline-underline may not work when flex child */
 .underline-animated {
   --underline-height: 2px;
   background-image: linear-gradient(transparent, transparent), linear-gradient(currentColor, currentColor);
@@ -911,14 +912,6 @@ header .logo__wrapper {
     display: none;
 }
 
-/* Note: On selected lists: Use --list-marker-img as mask */
-@supports (mask: url('mask.svg')) {
-    :is(.check-marks, .pros, .cons) li::before {
-        background: var(--list-marker-color);
-        mask-image: var(--list-marker-img);
-    }
-}
-
 .check-marks {
     --list-marker-color: var(--color-primary);
     --list-marker-img: url('../../img/check-mark-primary.svg');
@@ -936,6 +929,14 @@ header .logo__wrapper {
 .cons {
     --list-marker-color: var(--color-cons);
     --list-marker-img: url('../../img/x-mark-dark-red.svg');
+}
+
+/* Note: On selected lists: Use --list-marker-img as mask */
+@supports (mask: url('mask.svg')) {
+    :is(.check-marks, .pros, .cons) li::before {
+        background: var(--list-marker-color);
+        mask-image: var(--list-marker-img);
+    }
 }
 
 /* Color heading preceding pros/cons list */
@@ -1045,21 +1046,6 @@ header .logo__wrapper {
     text-transform: uppercase;
 }
 
-.cols-2 {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-}
-
-.cols-2.center {
-    align-items: center;
-}
-
-@media screen and (max-width: 767px) {
-    .cols-2 {
-        grid-template-columns: 1fr;
-    }
-}
 
 /* # TABLE */
 .table-wrapper {
@@ -1103,6 +1089,21 @@ table caption {
     margin-top: 1rem;
 }
 
+.cols-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+.cols-2.center {
+    align-items: center;
+}
+
+@media screen and (max-width: 767px) {
+    .cols-2 {
+        grid-template-columns: 1fr;
+    }
+}
 
 @media screen and (min-width: 768px) {
     /* ? whatever name */
@@ -1141,6 +1142,16 @@ table caption {
     margin-inline: auto;
 }
 
+@media (max-width: 767px) {
+    .members {
+        flex-wrap: wrap;
+    }
+    .member {
+        width: 100px;
+    }
+}
+
+
 figcaption {
     line-height: 1.15;
     margin-block: 1rem;
@@ -1158,24 +1169,6 @@ figcaption a {
 }
 
 
-@media (max-width: 767px) {
-    .members {
-        flex-wrap: wrap;
-    }
-    .member {
-        width: 100px;
-    }
-}
-
-hr[data-text]::before {
-    content: attr(data-text);
-    position: absolute;
-    left: 50%;
-    translate: -50% 0%;
-    background-color: white;
-    padding-inline: 10px;
-}
-
 hr,
 .hr-text {
     display: flex;
@@ -1187,25 +1180,22 @@ hr,
     text-align: center;
     line-height: 1;
 }
+
+hr[data-text]::before {
+    content: attr(data-text);
+    position: absolute;
+    left: 50%;
+    translate: -50% 0%;
+    background-color: white;
+    padding-inline: 10px;
+}
+
 .hr-text:before, 
 .hr-text:after {
     content: '';
     flex: 1 1;
     border-bottom: 1px solid;
     /* margin: auto; */
-}
-
-.banner-summit {
-    display: block;
-    max-width: 1000px;
-    margin-inline: auto;
-}
-
-.wide-image {
-    width: 100%;
-    height: 500px;
-    object-fit: cover;
-    object-position: center center;
 }
 
 
@@ -1256,6 +1246,7 @@ hr,
 .hero__buttons {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
     gap: 0.5rem 1rem;
 }
 
@@ -1316,7 +1307,6 @@ hr,
 .showcase.center {
     align-items: stretch;
 }
-
 
 /** Line separator **/
 /* .showcases__row:not(:first-child)::before{
@@ -1390,15 +1380,11 @@ hr,
 }
 
 @media screen and (max-width: 767px) {
-    .wall-headings h3 {
-        /* display: block; */
-    }
     .wall-headings h3::before {
         font-size: 2.0rem;
         margin-left: -0.333em;
         margin-right: 1rem;
         align-self: start;
-        /* float: left; */
     }
 }
 
@@ -1433,13 +1419,14 @@ footer {
     }    
 }
 
+
 .banner-form {
     background-image: url('https://iniciativa-bydleni.cz/storage/IDB/img/backgrounds/bg-form-banner.png'), url('../../img/backgrounds/texture-wall-lighter_2000.jpg');
     background-repeat: no-repeat;
     background-position: right center, center;
     background-size: auto 300px, cover;
     padding: 2rem min(2.5rem, 5%);
-    margin: 2rem 0;
+    margin-block: 2rem;
     display: flex;
     flex-direction: column;
     align-items: start;
@@ -1448,10 +1435,6 @@ footer {
 
 .banner-form h2 {
     max-width: 25rem;
-}
-
-.banner-form .btn {
-    /* margin-top: 1rem; */
 }
 
 @media screen and (max-width: 991px) {
@@ -1482,14 +1465,6 @@ blockquote,
     /* Left 'border' */
     box-shadow: inset 4px 0px 0px 0px var(--color-primary);
 }
-
-@media screen and (min-width: 992px) {
-    blockquote,
-    .quote {
-        /* font-size: 1.125rem; */
-    }
-}
-
 
 .magazine {
     background-color: #e8e8e8;
@@ -1722,7 +1697,9 @@ dialog::-webkit-backdrop {
 /* ! DEBUG */
 .alt {
     display: none;
-    /* background-color: rgba(0, 255, 128, 0.05); */
+}
+.debug {
+    display: none;
 }
 /* ! DEBUG */
 main+main {
